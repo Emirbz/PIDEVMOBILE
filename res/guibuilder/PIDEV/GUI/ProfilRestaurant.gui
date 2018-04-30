@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" layout="LayeredLayout" layeredLayoutPreferredWidthMM="0.0" layeredLayoutPreferredHeightMM="0.0"  autolayout="true" title="ProfilRestaurant" scrollableY="true" name="ProfilRestaurant">
+  <component type="Container" layout="BoxLayout" boxLayoutAxis="Y"  preferredSize="65.34391784667969mm 132.53969mm" name="Box_Layout_Y">
+    <layoutConstraint insets="0.0mm 1.322751mm 0.0mm 0.0mm" referenceComponents="-1 -1 -1 -1" referencePositions="0.0 0.0 0.0 0.0" />
+    <component type="ImageViewer" styles="bgImage:beaute.jpg;" name="Image_Viewer">
+    </component>
+    <component type="Label" uiid="Name" text="Hafood" styles="font:5.0mm; fgColor:ff214f; alignment:center;" name="Label">
+    </component>
+    <component type="Label" text="Amenties" styles="fgColor:36373c; alignment:left;" name="Label_1">
+    </component>
+    <component type="Container" layout="GridLayout" gridLayoutRows="1" gridLayoutColumns="3"  name="Grid_Layout">
+      <component type="CheckBox" text="CheckBox" styles="font:3.0mm;" name="Check_Box">
+      </component>
+      <component type="Button" text="Windows" name="Button">
+      </component>
+      <component type="Button" text="Linux" name="Button">
+      </component>
+      <component type="Button" text="Mac" name="Button">
+      </component>
+    </component>
+  </component>
+</component>
