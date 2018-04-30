@@ -5,17 +5,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
         <group name="Revision">
-            <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/ProfilRestaurant.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/Services/ProfilRestaurantService.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/ActivateForm.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/Entities/Etablissement.java</file>
+            <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/AddReview.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/SignUpForm.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/Services/ListEtablissementService.java</file>
-            <file>jar:file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/lib/CodenameOne_SRC.zip!/com/codename1/ui/Button.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/BaseForm.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/ListResto.java</file>
+            <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/Entities/Review.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/ProfilResto.java</file>
             <file>jar:file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/lib/CodenameOne_SRC.zip!/com/codename1/ui/Label.java</file>
+            <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/Services/ReviewService.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/WalkthruForm.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/NewsfeedForm.java</file>
             <file>file:/C:/Users/Emir/Documents/NetBeansProjects/PIMOBILE/src/PIDEV/GUI/CleanModern.java</file>

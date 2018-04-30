@@ -51,7 +51,7 @@ public class CleanModern {
             current.show();
             return;
         }
-     new NewsfeedForm(theme).show();
+        new NewsfeedForm(theme).show();
     }
 
     public void stop() {
