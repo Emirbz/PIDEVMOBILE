@@ -159,8 +159,8 @@ public class NewsfeedForm extends BaseForm {
             @Override
             public void actionPerformed(ActionEvent evt) {
                   tou.removeAll();
-               ListResto lr = new ListResto();
-                tou.add(lr.ListResto());
+               AffichageEvents lr = new AffichageEvents();
+                tou.add(lr.ListEvents());
                
             }
         });
