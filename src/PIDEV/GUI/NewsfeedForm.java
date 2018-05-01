@@ -164,9 +164,14 @@ public class NewsfeedForm extends BaseForm {
                   tou.removeAll();
                ListResto lr = new ListResto();
                 ComboBox<String> tri = new ComboBox<>("Meilleur Qualite","Meilleur Service");
+                ComboBox<String> tric = new ComboBox<>("Fast Food","Restaurant");
                Container filter = new Container(BoxLayout.x());
                  FloatingActionButton listresto = FloatingActionButton.createFAB(FontImage.MATERIAL_PLACE);
+                 
                  filter.add(listresto);
+                 filter.add(tri);
+                 tri.setUIID("BottomPad");
+                 filter.add(tric);
         listresto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -177,7 +182,7 @@ gm.start();
             }
         });
         tou.add(filter);
-        tou.add(tri);
+    
                 tou.add(lr.ListResto());
                
             }
