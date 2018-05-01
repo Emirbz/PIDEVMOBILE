@@ -22,7 +22,6 @@ import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
-import com.codename1.maps.Coord;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.ComboBox;
@@ -31,7 +30,6 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -47,6 +45,7 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.util.Resources;
 
 /**
@@ -164,14 +163,21 @@ public class NewsfeedForm extends BaseForm {
                   tou.removeAll();
                ListResto lr = new ListResto();
                 ComboBox<String> tri = new ComboBox<>("Meilleur Qualite","Meilleur Service");
-                ComboBox<String> tric = new ComboBox<>("Fast Food","Restaurant");
+              
+        Picker cat = new Picker();
+        String ses[] = new String[2];
+        ses[0] = "Fast Food";
+        ses[1] = "Lounge";
+        
+        cat.setStrings(ses);
+        cat.setSelectedString(ses[0]);
                Container filter = new Container(BoxLayout.x());
                  FloatingActionButton listresto = FloatingActionButton.createFAB(FontImage.MATERIAL_PLACE);
-                 
+                 cat.setUIID("BottomPad");
                  filter.add(listresto);
-                 filter.add(tri);
+                 filter.add(cat);
                  tri.setUIID("BottomPad");
-                 filter.add(tric);
+             
         listresto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

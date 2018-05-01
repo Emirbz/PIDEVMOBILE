@@ -96,4 +96,23 @@ public class ListEtablissementService {
         NetworkManager.getInstance().addToQueueAndWait(con);
         return listEtabs;
     }
+    /////////////////
+    
+
+    ArrayList<Etablissement> listEtabsCat = new ArrayList<>();
+
+    public ArrayList<Etablissement> getList2Cat(String souscat) {
+        
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/PIDEV/web/app_dev.php/amir/list_restaurantcat_json?souscat="+souscat);
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                ListEtablissementService ser = new ListEtablissementService();
+               listEtabsCat = ser.getListTask(new String(con.getResponseData()));
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+        return listEtabsCat;
+    }
 }
