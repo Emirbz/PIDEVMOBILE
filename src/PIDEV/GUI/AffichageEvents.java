@@ -92,7 +92,7 @@ public class AffichageEvents {
 
     public Container ListEvents() {
         theme = UIManager.initFirstTheme("/theme");
-        f = new Form("Liste Restaurant", BoxLayout.x());
+        f = new Form("Liste Evenements", BoxLayout.x());
         Container c1 = null;
         Eventsservices Es = new Eventsservices();
         for (Events e : Es.getLisEvent1()) {

@@ -55,7 +55,10 @@ public class Profileventservice {
                 e.setDescription(obj.get("description").toString());
                 e.setNbrplace(Integer.parseInt(obj.get("nbrplace").toString().substring(0,obj.get("nbrplace").toString().lastIndexOf("."))));
                 //e.setAdressemail(obj.get("adressemail").toString());
-                
+                e.setNumTel(Integer.parseInt(obj.get("numTel").toString()));
+                e.setAdressefacebook(obj.get("adressefacebook").toString());
+                e.setAdressetwitter(obj.get("adressetwitter").toString());
+                e.setFumer(Boolean.parseBoolean(obj.get("fumer").toString()));
                 
                 
                 Map<String,Object> d=(Map<String,Object>)obj.get("dateEvenement");

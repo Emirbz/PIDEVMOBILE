@@ -10,6 +10,7 @@ import PIDEV.Services.Profileventservice;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
+import com.codename1.ui.CheckBox;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
@@ -19,10 +20,9 @@ import com.codename1.ui.Label;
 import com.codename1.ui.Tabs;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
@@ -42,6 +42,10 @@ public class ProfilEvent extends BaseForm {
     Label description;
     Label nbrplace;
     Label adressemail;
+    Label numTel;
+    Label adressefacebook;
+    Label adressetwitter;
+    Label wifi;
     private Resources theme;
 
     public ProfilEvent(Resources res, int id) throws IOException {
@@ -72,19 +76,34 @@ public class ProfilEvent extends BaseForm {
             nbrplace = new Label();
             adressemail = new Label();
             dateEvenement = new Label();
+            numTel = new Label();
+            adressefacebook = new Label();
+            adressetwitter = new Label();
+            wifi = new Label("Wifi");
 
-            Container cnom = new Container(new BoxLayout(BoxLayout.X_AXIS));
+            Container cnom = new Container( new BoxLayout(BoxLayout.X_AXIS));
             Container caddress = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Container cdate = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Container cdescription = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Container cplace = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Container cadressemail = new Container(new BoxLayout(BoxLayout.X_AXIS));
+            Container cnumtel = new Container(new BoxLayout(BoxLayout.X_AXIS));
+            Container cadressefacebook = new Container(new BoxLayout(BoxLayout.X_AXIS));
+            Container cadressetwitter = new Container(new BoxLayout(BoxLayout.X_AXIS));
+            Container amenties1 = new Container(BoxLayout.x());
+            //Container amenties2 = new Container(BoxLayout.x());
+            //Container amenties3 = new Container(BoxLayout.x());
+            //Container amenties4 = new Container(BoxLayout.x());
             cnom.add(name);
             caddress.add(address);
             cdescription.add(description);
             cplace.add(nbrplace);
             cadressemail.add(adressemail);
             cdate.add(dateEvenement);
+            cnumtel.add(numTel);
+            cadressefacebook.add(adressefacebook);
+            cadressetwitter.add(adressetwitter);
+            
 
 //            cnom.add(dateEvenement);
             Container c1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
@@ -92,6 +111,8 @@ public class ProfilEvent extends BaseForm {
             cnom.getStyle().setBgTransparency(150);
             caddress.getStyle().setBgColor(0x99DDD);
             caddress.getStyle().setBgTransparency(150);
+            cplace.getStyle().setBgColor(0x99DDD);
+            cplace.getStyle().setBgTransparency(150);
             Image placeholder = Image.createImage(500, 170);
             EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
             URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + e.getDevis_name(), "http://localhost/PIDEV/web/devis/" + e.getDevis_name());
@@ -107,31 +128,60 @@ public class ProfilEvent extends BaseForm {
 
             URLImage imgUrl3 = URLImage.createToStorage(encImage1, "http://localhost/PIDEV/web/uploads/images/" + e.getImage2(), "http://localhost/PIDEV/web/uploads/images/" + e.getImage2());
             ImageViewer img3x = new ImageViewer(imgUrl3);
+            GridLayout gr = new GridLayout(4, 4);
+            Container amenties = new Container();
+            amenties.setLayout(gr);
+//            Container amenties1 = new Container(BoxLayout.x());
+//            Container amenties2 = new Container(BoxLayout.x());
+//            Container amenties3 = new Container(BoxLayout.x());
+            //Container amenties4 = new Container(BoxLayout.x());
+            CheckBox Wific = new CheckBox();
+            
+            Wific.setEnabled(false);
+            Wific.setSelected(e.isWifi());
+            Wific.setUIID("Label3");
+            
+
             c1.add(img1);
             c1.add(cnom);
             c1.add(caddress);
             c1.add(cdescription);
             c1.add(cdate);
-            //c1.add(cplace);
+            c1.add(cplace);
+            c1.add(cnumtel);
+            c1.add(cadressefacebook);
+            c1.add(cadressetwitter);
             c1.add(cadressemail);
             Container cimage = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             cimage.add(img1x);
             cimage.add(img2x);
             cimage.add(img3x);
             c1.add(cimage);
-
+            amenties1.add(wifi);
+            amenties1.add(Wific);
+            
+            amenties.add(amenties1);
+            //amenties.add(amenties2);
+            //amenties.add(amenties3);
+            //amenties.add(amenties4);
+            c1.add(amenties);
             f.add(c1);
 
             name.setText(e.getName());
 
-            address.setText(e.getAdresse());
+            address.setText("Adresse: "+e.getAdresse());
 
-            description.setText(e.getDescription());
+            description.setText("Description : "+e.getDescription());
 
-            nbrplace.setText(String.valueOf(e.getNbrplace()));
+            nbrplace.setText("Nombre de places : "+String.valueOf(e.getNbrplace()));
             adressemail.setText(e.getAdressemail());
 
-            dateEvenement.setText(e.getDateEvenement().toString());
+            dateEvenement.setText("Date de l'évènement: "+e.getDateEvenement().toString());
+            numTel.setText("Numéro de tel:"+String.valueOf(e.getNumTel()));
+            adressefacebook.setText("Adresse facebook :"+e.getAdressefacebook().toString());
+            adressetwitter.setText("Adresse twitter :"+e.getAdressetwitter().toString());
+            
+            
 
 //            dateEvenement.setText(e.getDateEvenement().toString());
 //            f.getToolbar().addCommandToOverflowMenu("Back", theme.getImage("back.png"), new ActionListener() {
