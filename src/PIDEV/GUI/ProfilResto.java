@@ -27,6 +27,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
 
@@ -38,8 +39,10 @@ public class ProfilResto extends BaseForm {
 
     Label name;
     Label address;
+    private Resources theme;
 
     public ProfilResto(Resources res, int id) throws IOException {
+        
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -51,6 +54,7 @@ public class ProfilResto extends BaseForm {
 
         tb.addSearchCommand(e -> {
         });
+         theme = UIManager.initFirstTheme("/theme");
 
         ProfilRestaurantService pr = new ProfilRestaurantService();
         for (Etablissement e : pr.getList2(id)) {
@@ -142,8 +146,7 @@ public class ProfilResto extends BaseForm {
 review.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-               AddReview ad=new AddReview();
-             ad.AddReview(e);
+      new AddReview(e,theme).show();
                 }
             });
             Label amentieslabel = new Label("Amenties :");

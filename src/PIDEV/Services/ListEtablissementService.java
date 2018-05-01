@@ -52,6 +52,7 @@ public class ListEtablissementService {
                 List<List<Object>> l = new ArrayList<List<Object>>(cc.values());
                 SousCategorie sc = new SousCategorie();
                 sc.setNom(String.valueOf(l.get(1)));
+         
                 e.setSouscat(sc);
                 e.setDevis_name(obj.get("devisName").toString());
                 e.setImg1(obj.get("img1").toString());
@@ -59,6 +60,13 @@ public class ListEtablissementService {
                 e.setImg3(obj.get("img3").toString());
                 e.setMoyqualite(Double.parseDouble(obj.get("moyqualite").toString()));
                 e.setMoyservice(Double.parseDouble(obj.get("moyservice").toString()));
+                e.setLatitude(Double.parseDouble(obj.get("latitude").toString()));
+                e.setLongitude(Double.parseDouble(obj.get("longitude").toString()));
+                e.setClimatisation(Boolean.parseBoolean(obj.get("climatisation").toString()));
+                 e.setLundisamedio(obj.get("lundisamedio").toString());
+                 e.setLundisamedif(obj.get("lundisamedif").toString());
+                 e.setDimancheo(obj.get("dimancheo").toString());
+                 e.setDimanchef(obj.get("dimanchef").toString());
               
                 
               

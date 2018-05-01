@@ -18,11 +18,14 @@
  */
 package PIDEV.GUI;
 
+import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
+import com.codename1.maps.Coord;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
+import com.codename1.ui.ComboBox;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
@@ -160,6 +163,21 @@ public class NewsfeedForm extends BaseForm {
             public void actionPerformed(ActionEvent evt) {
                   tou.removeAll();
                ListResto lr = new ListResto();
+                ComboBox<String> tri = new ComboBox<>("Meilleur Qualite","Meilleur Service");
+               Container filter = new Container(BoxLayout.x());
+                 FloatingActionButton listresto = FloatingActionButton.createFAB(FontImage.MATERIAL_PLACE);
+                 filter.add(listresto);
+        listresto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+GoogleMapsTestApp gm = new GoogleMapsTestApp();
+gm.start();
+        
+         
+            }
+        });
+        tou.add(filter);
+        tou.add(tri);
                 tou.add(lr.ListResto());
                
             }
