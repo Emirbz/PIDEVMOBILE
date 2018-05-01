@@ -155,5 +155,77 @@ public class ListResto {
         s.setBgImage(star);
         s.setBgTransparency(0);
     }
+ public Container ListRestoTrie(String sc) {
+        theme = UIManager.initFirstTheme("/theme");
+        f = new Form("Liste Restaurant", BoxLayout.x());
+        Container c1 = null;
+        ListEtablissementService lr = new ListEtablissementService();
+        for (Etablissement e : lr.getList2Cat(sc)) {
+            System.out.println(e.getName());
 
+            Image placeholder = Image.createImage(130, 100);
+            EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
+            URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + e.getDevis_name(), "http://localhost/PIDEV/web/devis/" + e.getDevis_name());
+            ImageViewer img1 = new ImageViewer(imgUrl);
+
+            name = new Label();
+
+            souscat = new Label();
+
+           
+            int fontSize = Display.getInstance().convertToPixels(3);
+
+            // requires Handlee-Regular.ttf in the src folder root!
+            Font ttfFont = Font.createTrueTypeFont("Poppins", "Poppins-Bold.ttf").
+                    derive(fontSize, Font.STYLE_PLAIN);
+            Container cnom = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+
+            name = new Label(e.getName());
+            name.addPointerPressedListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    try {
+                        new ProfilResto(theme,e.getId()).show();
+                    } catch (IOException ex) {
+                       
+                    }
+
+                }
+            });
+
+            name.setUIID("Label");
+
+            souscat = new Label(e.getSouscat().toString());
+            Style souscaticon = new Style(souscat.getUnselectedStyle());
+            souscaticon.setFgColor(0x73879c);
+            FontImage souscaticonx = FontImage.createMaterial(FontImage.MATERIAL_HOME, souscaticon);
+            souscat.setIcon(souscaticonx);
+            souscat.setUIID("Label2");
+
+            String qualiteXX = String.valueOf(e.getMoyqualite());
+
+            Slider qualite = createStarRankSlider(Integer.parseInt(qualiteXX.substring(0, 1)));
+            System.out.println(Integer.parseInt(qualiteXX.substring(0, 1)));
+            cnom.getStyle().setPaddingBottom(2);
+
+            cnom.add(name);
+            cnom.add(souscat);
+            cnom.add(qualite);
+        
+
+//           cnom.add(servicec);
+            c1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
+            c1.getStyle().setPaddingBottom(20);
+
+            c1.add(img1);
+
+            c1.add(cnom);
+
+//            c1.add(details);
+            cx.add(c1);
+
+        }
+        return cx;
+
+    }
 }

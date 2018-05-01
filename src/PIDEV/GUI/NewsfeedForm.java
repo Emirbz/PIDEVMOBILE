@@ -18,6 +18,8 @@
  */
 package PIDEV.GUI;
 
+import PIDEV.Entities.SousCategorie;
+import PIDEV.Services.ListEtablissementService;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
@@ -47,6 +49,7 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.spinner.Picker;
 import com.codename1.ui.util.Resources;
+import java.util.ArrayList;
 
 /**
  * The newsfeed form
@@ -55,6 +58,7 @@ import com.codename1.ui.util.Resources;
  */
 public class NewsfeedForm extends BaseForm {
  Container tou = new Container(BoxLayout.y());
+ Container toufilter = new Container(BoxLayout.y());
  
 
     public NewsfeedForm(Resources res) {
@@ -162,12 +166,20 @@ public class NewsfeedForm extends BaseForm {
             public void actionPerformed(ActionEvent evt) {
                   tou.removeAll();
                ListResto lr = new ListResto();
-                ComboBox<String> tri = new ComboBox<>("Meilleur Qualite","Meilleur Service");
-              
+               
+
+ListEtablissementService le = new ListEtablissementService();
+        ArrayList<SousCategorie> cats = le.getListsouscat();
         Picker cat = new Picker();
-        String ses[] = new String[2];
-        ses[0] = "Fast Food";
-        ses[1] = "Lounge";
+//        String ses[] = new String[le.getListsouscat().size()];
+//        for (int i=0;i<le.getListsouscat().size();i++)
+//        {ses[i] = cats.get(i).getNom();}
+ String ses[] = new String[2];
+
+        ses[0] = "Lounge";
+                ses[1]="zzzz";
+                
+        Button go = new Button("Filter");
         
         cat.setStrings(ses);
         cat.setSelectedString(ses[0]);
@@ -176,7 +188,9 @@ public class NewsfeedForm extends BaseForm {
                  cat.setUIID("BottomPad");
                  filter.add(listresto);
                  filter.add(cat);
-                 tri.setUIID("BottomPad");
+                 filter.add(go);
+                 
+              
              
         listresto.addActionListener(new ActionListener() {
             @Override
@@ -188,8 +202,19 @@ gm.start();
             }
         });
         tou.add(filter);
-    
+        
+  
                 tou.add(lr.ListResto());
+                go.addActionListener(new ActionListener() {
+                      @Override
+                      public void actionPerformed(ActionEvent evt) {
+                       tou.removeAll();
+                          System.out.println("tremova");
+                       
+                           toufilter.add(lr.ListRestoTrie(cat.getSelectedString())); /////////zab
+                           add(toufilter);
+                      }
+                  });
                
             }
         });

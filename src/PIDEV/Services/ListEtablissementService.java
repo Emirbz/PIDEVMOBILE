@@ -115,4 +115,53 @@ public class ListEtablissementService {
         NetworkManager.getInstance().addToQueueAndWait(con);
         return listEtabsCat;
     }
+    public ArrayList<SousCategorie> getListSouscat(String json) {
+
+        ArrayList<SousCategorie> listSousCategorie = new ArrayList<>();
+
+        try {
+//            System.out.println(json);
+            JSONParser j = new JSONParser();
+
+            Map<String, Object> Etab = j.parseJSON(new CharArrayReader(json.toCharArray()));
+
+            List<Map<String, Object>> list = (List<Map<String, Object>>) Etab.get("root");
+
+            for (Map<String, Object> obj : list) {
+                SousCategorie e= new SousCategorie();
+
+                float id = Float.parseFloat(obj.get("id").toString());
+
+                e.setId((int) id);
+
+                e.setNom(obj.get("nom").toString());
+
+              
+                
+              
+              listSousCategorie.add(e);
+
+            }
+
+        } catch (IOException ex) {
+        }
+
+        return  listSousCategorie;
+
+    }
+     ArrayList<SousCategorie> listSousCat = new ArrayList<>();
+    public ArrayList<SousCategorie> getListsouscat() {
+        
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/PIDEV/web/app_dev.php/amir/list_cat_json");
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                ListEtablissementService ser = new ListEtablissementService();
+              listSousCat = ser.getListSouscat(new String(con.getResponseData()));
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+        return listSousCat;
+    }
 }
