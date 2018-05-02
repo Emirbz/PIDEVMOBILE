@@ -55,7 +55,7 @@ public class AddReview extends BaseForm {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("");
+        setTitle("Noter "+e.getName());
         getContentPane().setScrollVisible(false);
          super.addSideMenu(res);
           Form previous = getCurrentForm();
@@ -106,13 +106,6 @@ public class AddReview extends BaseForm {
 
 
          ButtonGroup barGroup = new ButtonGroup();
-RadioButton all = RadioButton.createToggle("Noter "+e.getName(), barGroup);
-
-        all.setUIID("SelectBar");
-         add(LayeredLayout.encloseIn(
-                GridLayout.encloseIn(1, all)
-                
-        ));
          Slider qualite = createStarRankSlider();
          Slider service = createStarRankSlider();
            Container rate = new Container(BoxLayout.x());
