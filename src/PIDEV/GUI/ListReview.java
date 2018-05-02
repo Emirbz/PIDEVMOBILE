@@ -62,7 +62,9 @@ Label name;
                    @Override
                    public void actionPerformed(ActionEvent evt) {
                     
-                       System.out.println("id user"+e.getIduser().getId());
+                       System.out.println("name "+e.getIduser().getName());
+                       System.out.println("id "+e.getIduser().getId());
+                       System.out.println("surname "+e.getIduser().getSurname());
                       if ( e.getId()!=x.getId())
                     { ToastBar.showMessage("Il ne s'agit pas de votre FeedBack", FontImage.MATERIAL_INFO);}
                        else
