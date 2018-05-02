@@ -70,6 +70,7 @@ Label name;
             EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
 
             URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + e.getIduser().getDevis_name(), "http://localhost/PIDEV/web/devis/" + e.getIduser().getDevis_name());
+            System.out.println("http://localhost/PIDEV/web/devis/" + e.getIduser().getDevis_name());
             ImageViewer img1 = new ImageViewer(imgUrl);
 
             titre = new Label();

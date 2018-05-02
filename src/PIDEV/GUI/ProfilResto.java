@@ -64,9 +64,7 @@ public class ProfilResto extends BaseForm {
 
         super.addSideMenu(res);
 
-        tb.addSearchCommand(e -> {
-        });
-        
+       
          
          theme = UIManager.initFirstTheme("/theme");
 
