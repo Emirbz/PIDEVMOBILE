@@ -11,13 +11,13 @@ import com.codename1.ui.Label;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BoxLayout;
 import PIDEV.Entities.Deal;
+import PIDEV.Entities.Note;
 import PIDEV.Entities.Reclamation;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.InteractionDialog;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.convertToPixels;
 import com.codename1.ui.Container;
-import com.codename1.ui.Display;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
@@ -51,14 +51,50 @@ public class DealDetails {
         String adresse = d.getAdresse();
         String region = d.getRegion();
         Slider rat = createStarRankSlider(d.getRating());
-        Container ratc = new Container(BoxLayout.x());
-
+        Container ratc = new Container(BoxLayout.y());
+        Container ra = new Container(BoxLayout.x());
         Label ratlabel = new Label("Rating:");
         Button rateme = new Button("Evaluer");
-        ratc.add(ratlabel);
-        ratc.add(rat);
+        ra.add(ratlabel);
+        ra.add(rat);
+        ratc.add(ra);
         ratc.add(rateme);
         Button rec = new Button("Réclamer");
+        rateme.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+//                Message m=new Message("test");
+//                Display.getInstance().sendMessage(new String[] {"skander.chamakhi@gmail.com"}, "subject", m);
+
+                InteractionDialog dlg = new InteractionDialog("Evaluer");
+                dlg.setLayout(new BorderLayout());
+                Container c = new Container();
+                dlg.add(BorderLayout.CENTER, c);
+                Container de = new Container(BoxLayout.x());
+                Slider ttt = createStarRankSlider();
+                Button close = new Button("Close");
+                Button reclam = new Button("Réclamer");
+                de.add(close);
+                de.add(reclam);
+                c.add(ttt);
+                close.addActionListener((ee) -> dlg.dispose());
+                dlg.addComponent(de);
+                reclam.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        Note n = new Note();
+                        n.setIddeal(d.getId());
+                        n.setIduser(4);
+                        n.setRating(ttt.getProgress());
+                        
+                        dlg.dispose();
+                    }
+                });
+                dlg.show(30, 30, 30, 30);
+            }
+
+        });
+
         rec.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -90,9 +126,11 @@ public class DealDetails {
                         dlg.dispose();
                     }
                 });
-                dlg.show(20, 20, 10, 10);
+                dlg.show(30, 30, 30, 30);
             }
+
         });
+
         propertyDetails.add(new Label("Nom : " + title, "LargeTitle")).
                 add(new Label("Prix : " + price_formatted, "SecondaryTitle")).
                 add(img1).
@@ -141,4 +179,31 @@ public class DealDetails {
         s.setBgTransparency(0);
     }
 
+    private Slider createStarRankSlider() {
+        Font fnt = Font.createTrueTypeFont("native:MainLight", "native:MainLight").
+                derive(convertToPixels(5, true), Font.STYLE_PLAIN);
+        Style s = new Style(0xffff33, 0, fnt, (byte) 0);
+        Image fullStar = FontImage.createMaterial(FontImage.MATERIAL_STAR, s).toImage();
+        s.setOpacity(100);
+        s.setFgColor(0);
+        Image emptyStar = FontImage.createMaterial(FontImage.MATERIAL_STAR, s).toImage();
+        Slider starRank = new Slider() {
+            public void refreshTheme(boolean merge) {
+                // special case when changing the theme while the dialog is showing
+                initStarRankStyle(getSliderEmptySelectedStyle(), emptyStar);
+                initStarRankStyle(getSliderEmptyUnselectedStyle(), emptyStar);
+                initStarRankStyle(getSliderFullSelectedStyle(), fullStar);
+                initStarRankStyle(getSliderFullUnselectedStyle(), fullStar);
+            }
+        };
+        starRank.setEditable(true);
+        starRank.setMinValue(0);
+        starRank.setMaxValue(10);
+        initStarRankStyle(starRank.getSliderEmptySelectedStyle(), emptyStar);
+        initStarRankStyle(starRank.getSliderEmptyUnselectedStyle(), emptyStar);
+        initStarRankStyle(starRank.getSliderFullSelectedStyle(), fullStar);
+        initStarRankStyle(starRank.getSliderFullUnselectedStyle(), fullStar);
+        starRank.setPreferredSize(new Dimension(fullStar.getWidth() * 5, fullStar.getHeight()));
+        return starRank;
+    }
 }

@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>PIDEV.Entities.Reclamation</class>
     <class>PIDEV.Entities.User_1</class>
+    <class>PIDEV.Entities.Note</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pidev?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -32,6 +32,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import PIDEV.Services.DealService;
+import com.codename1.components.ImageViewer;
+import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
+import com.codename1.ui.URLImage;
+import rest.file.uploader.tn.FileUploader;
 
 /**
  *
@@ -73,54 +78,126 @@ public class AddDeal {
         cat.setStrings(ses);
         cat.setSelectedString(ses[0]);
         Button avatar = new Button("");
-        avatar.setUIID("InputAvatar");
-        Image defaultAvatar = FontImage.createMaterial(FontImage.MATERIAL_CAMERA, "InputAvatarImage", 8);
-        Image circleMaskImage = Image.createImage(250, 200);
-        defaultAvatar = defaultAvatar.scaled(circleMaskImage.getWidth(), circleMaskImage.getHeight());
-        defaultAvatar = ((FontImage) defaultAvatar).toEncodedImage();
-        Object circleMask = circleMaskImage.createMask();
-        defaultAvatar = defaultAvatar.applyMask(circleMask);
-        avatar.setIcon(defaultAvatar);
-
-        avatar.addActionListener(e -> {
-            if (Dialog.show("Camera or Gallery", "Would you like to use the camera or the gallery for the picture?", "Camera", "Gallery")) {
-                String pic = Capture.capturePhoto();
-                if (pic != null) {
-                    try {
-                        Image img = Image.createImage(pic).fill(circleMaskImage.getWidth(), circleMaskImage.getHeight());
-                        avatar.setIcon(img.applyMask(circleMask));
-                        Random randomGenerator = new Random();
-
-                        int randomInt = randomGenerator.nextInt(19999999);
-                        String devisnamee = String.valueOf(randomInt) + ".jpg";
-                        imgname = devisnamee;
-                        System.out.println(imgname);
-                        System.out.println(FileSystemStorage.getInstance().getAppHomePath());
-                        String imageFile = "file://C:/wamp64/www/PIDEV/web/devis/" + devisnamee;
-                        try (OutputStream os = FileSystemStorage.getInstance().openOutputStream(imageFile);) {
-                            ImageIO.getImageIO().save(img, os, ImageIO.FORMAT_PNG, 1);
-                        } catch (IOException err) {
-                            Log.e(err);
+//        avatar.setUIID("InputAvatar");
+//        Image defaultAvatar = FontImage.createMaterial(FontImage.MATERIAL_CAMERA, "InputAvatarImage", 8);
+//        Image circleMaskImage = Image.createImage(250, 200);
+//        defaultAvatar = defaultAvatar.scaled(circleMaskImage.getWidth(), circleMaskImage.getHeight());
+//        defaultAvatar = ((FontImage) defaultAvatar).toEncodedImage();
+//        Object circleMask = circleMaskImage.createMask();
+//        defaultAvatar = defaultAvatar.applyMask(circleMask);
+//        avatar.setIcon(defaultAvatar);
+//
+//        avatar.addActionListener(e -> {
+//            if (Dialog.show("Camera or Gallery", "Would you like to use the camera or the gallery for the picture?", "Camera", "Gallery")) {
+//                String pic = Capture.capturePhoto();
+//                if (pic != null) {
+//                    try {
+//                        Image img = Image.createImage(pic).fill(circleMaskImage.getWidth(), circleMaskImage.getHeight());
+//                        avatar.setIcon(img.applyMask(circleMask));
+//                        Random randomGenerator = new Random();
+//
+//                        int randomInt = randomGenerator.nextInt(19999999);
+//                        String devisnamee = String.valueOf(randomInt) + ".jpg";
+//                        imgname = devisnamee;
+//                        System.out.println(imgname);
+//                        System.out.println(FileSystemStorage.getInstance().getAppHomePath());
+//                        String imageFile = "file://C:/wamp64/www/PIDEV/web/devis/" + devisnamee;
+//                        try (OutputStream os = FileSystemStorage.getInstance().openOutputStream(imageFile);) {
+//                            ImageIO.getImageIO().save(img, os, ImageIO.FORMAT_PNG, 1);
+//                        } catch (IOException err) {
+//                            Log.e(err);
+//                        }
+//                    } catch (IOException err) {
+//                        ToastBar.showErrorMessage("An error occured while loading the image: " + err);
+//                        Log.e(err);
+//                    }
+//                }
+//            } else {
+//                openGallery(ee -> {
+//                    if (ee.getSource() != null) {
+//                        try {
+//                            Image img = Image.createImage((String) ee.getSource()).fill(circleMaskImage.getWidth(), circleMaskImage.getHeight());
+//                            avatar.setIcon(img.applyMask(circleMask));
+//                        } catch (IOException err) {
+//                            ToastBar.showErrorMessage("An error occured while loading the image: " + err);
+//                            Log.e(err);
+//                        }
+//                    }
+//                }, GALLERY_IMAGE);
+//            }
+//        });
+       Button modifImageBtn = new Button("modifier image");
+        ImageViewer imageUser=new ImageViewer();
+           
+            EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(100, 100), true);
+            imageUser.setImage(URLImage.createToStorage(placeholder, "http://localhost/pidev/web/devis/5a8b1ad45fe17.png", "http://localhost/pidev/web/devis/5a8b1ad45fe17.png"));
+           
+        
+        modifImageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    FileUploader fu = new FileUploader("http://localhost/pidev/web/");
+                    
+                    //Upload
+                    
+                    Display.getInstance().openGallery(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent v) {
+                           
+                            
+                            String filePath = ((String)v.getSource()).substring(7);
+                            System.out.println(filePath);
+                            String fileNameInServer ="";
+                            try {
+                                fileNameInServer = fu.upload(filePath);
+//                               if(!userSession.getPhoto().equals("default0d.jpg")){
+//                                   System.out.println("deletetttt");
+//                                   System.out.println(userSession.getPhoto());
+//                                   
+//                                   if(fu.delete(userSession.getPhoto())){
+//                                       System.err.println("delettttttotot");
+//                           //            Storage.getInstance().deleteStorageFile("user_"+userSession.getId());
+//                           
+//                                   }
+//                               
+//                               }
+                                
+                             imgname=fileNameInServer;
+                               
+                                
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                                System.out.println(fileNameInServer);
+                                 
+                               
+                          
                         }
-                    } catch (IOException err) {
-                        ToastBar.showErrorMessage("An error occured while loading the image: " + err);
-                        Log.e(err);
-                    }
+                    }, Display.GALLERY_IMAGE);
+                    
+                    
+                }catch(Exception ex){
+                    ex.printStackTrace();
                 }
-            } else {
-                openGallery(ee -> {
-                    if (ee.getSource() != null) {
-                        try {
-                            Image img = Image.createImage((String) ee.getSource()).fill(circleMaskImage.getWidth(), circleMaskImage.getHeight());
-                            avatar.setIcon(img.applyMask(circleMask));
-                        } catch (IOException err) {
-                            ToastBar.showErrorMessage("An error occured while loading the image: " + err);
-                            Log.e(err);
-                        }
-                    }
-                }, GALLERY_IMAGE);
+                /*  FosUser user = new FosUser(1,
+                userName.getText(),
+                userName.getText().toLowerCase(),
+                email.getText(),
+                email.getText().toLowerCase(),
+                true,
+                "dddd",
+                "");
+                user.setTelephone(Integer.parseInt(telephone.getText()));
+                
+                new userService().inscriptionSimple(user);
+                
+                */
             }
         });
+        
+        f.add(imageUser);
+        f.add(modifImageBtn);
         Button btn = new Button("Valider");
         nom.getStyle().setMargin(2, 2, 2, 2);
         f.add(nom);
