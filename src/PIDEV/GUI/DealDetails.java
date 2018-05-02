@@ -18,12 +18,14 @@ import com.codename1.components.InteractionDialog;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.convertToPixels;
+import static com.codename1.ui.CN.getCurrentForm;
 import com.codename1.ui.Container;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Slider;
 import com.codename1.ui.TextField;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
@@ -36,11 +38,15 @@ import com.codename1.ui.plaf.Style;
  *
  * @author Skan
  */
-public class DealDetails {
+public class DealDetails extends BaseForm {
 
     void showPropertyDetails(Deal d) {
         final Form propertyDetails = new Form("Property Details", new BoxLayout(BoxLayout.Y_AXIS));
-
+        Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        setTitle(d.getNom());
+        getContentPane().setScrollVisible(false);
         String price_formatted = d.getNewprix().toString();
         String title = d.getNom();
         String summary = d.getDescription();
@@ -146,6 +152,10 @@ public class DealDetails {
                 add("Région : \n" + region).
                 add("Description : \n" + summary).
                 add(rec);
+        Form previous = getCurrentForm();
+        propertyDetails.getToolbar().setBackCommand("", (e) -> {
+            previous.showBack();
+        });
         propertyDetails.show();
     }
 
