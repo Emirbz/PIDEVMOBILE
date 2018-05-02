@@ -56,20 +56,20 @@ Label name;
         for (Review e : lr.getList2(id)) {
             User x =SignInForm.userCon;
                FloatingActionButton nextForm = FloatingActionButton.createFAB(FontImage.MATERIAL_DELETE);
-             if (x==null ||e.getId()!=x.getId())
-             {
-                 nextForm.setVisible(false);
-             }
+               System.out.println("id user "+e.getIduser().getId());
+             
               
                nextForm.addActionListener(new ActionListener() {
                    @Override
                    public void actionPerformed(ActionEvent evt) {
                     
-                       System.out.println("name "+e.getIduser().getName());
-                       System.out.println("id "+e.getIduser().getId());
-                       System.out.println("surname "+e.getIduser().getSurname());
+                    if( x==null ||e.getId()!=x.getId())
+                    {
+                         ToastBar.showMessage("Il ne s'agit pas de votre FeedBack", FontImage.MATERIAL_INFO);
+                    }
+                    else
                        
-                     
+                    {
                            
                 lr.deleterev(e.getId(),id);
                   ToastBar.showMessage("Votre commentaire a été supprimé", FontImage.MATERIAL_INFO);
@@ -77,7 +77,7 @@ Label name;
                            new ProfilResto(theme,id).show();
                        } catch (IOException ex) {
                           
-                       }
+                       }}
                    }
                });
           
