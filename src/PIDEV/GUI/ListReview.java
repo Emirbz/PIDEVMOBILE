@@ -6,6 +6,7 @@
 package PIDEV.GUI;
 
 import PIDEV.Entities.Review;
+import PIDEV.Entities.User;
 import PIDEV.Services.ReviewService;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
@@ -30,6 +31,7 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
+import PIDEV.GUI.SignInForm;
 
 
 
@@ -50,12 +52,17 @@ Label name;
         f = new Form("List Review", BoxLayout.y());
         Container c1 = null;
         ReviewService lr = new ReviewService();
-       
+         User x =SignInForm.userCon;
         for (Review e : lr.getList2(id)) {
                FloatingActionButton nextForm = FloatingActionButton.createFAB(FontImage.MATERIAL_DELETE);
+               if ((x==null )||(x.getId()!=e.getIduser().getId()))
+               {nextForm.setVisible(false);
+                       
+                       }
                nextForm.addActionListener(new ActionListener() {
                    @Override
                    public void actionPerformed(ActionEvent evt) {
+                     
                 lr.deleterev(e.getId(),id);
                   ToastBar.showMessage("Votre commentaire a été supprimé", FontImage.MATERIAL_INFO);
                        try {
