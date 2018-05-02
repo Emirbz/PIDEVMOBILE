@@ -38,6 +38,7 @@ import java.util.Random;
 public class UpdateDeal {
 
     Form f;
+    int id;
     String imgname;
     TextField nom = new TextField("", "Nom");
     TextField desc = new TextField("", "Description");
@@ -91,6 +92,7 @@ public class UpdateDeal {
                 d.setOldprix(Double.parseDouble(oldprix.getText()));
                 d.setPromotion(Double.parseDouble(promotion.getText()));
                 d.setPlacesdispo(Integer.parseInt(places.getText()));
+                d.setDevisName(imgname);
                 Date date = datef.getDate();
                 d.setDatefin(date);
                 d.setDevisName(imgname);
@@ -103,7 +105,7 @@ public class UpdateDeal {
 
     public void ModifierDeal(Deal ta) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://localhost/pidev/web/app_dev.php/deals/ujs?id=" + ta.getId() + "?nom=" + ta.getNom() + "&promotion=" + ta.getPromotion()
+        String Url = "http://localhost/pidev/web/app_dev.php/deals/ujs/" + id + "?nom=" + ta.getNom() + "&promotion=" + ta.getPromotion()
                 + "&oldprix=" + ta.getOldprix() + "&description=" + ta.getDescription() + "&datefin=" + ta.getDatefin()
                 + "&region=" + ta.getRegion() + "&adresse=" + ta.getAdresse() + "&devisName=" + ta.getDevisName() + "&placesdispo=" + ta.getPlacesdispo();
         con.setUrl(Url);
@@ -182,5 +184,8 @@ public class UpdateDeal {
         System.out.println(d.getDatefin());
         datef.setDate(d.getDatefin());
         desc.setText(d.getDescription());
+        System.out.println(d.getId());
+        imgname = d.getDevisName();
+        id = d.getId();
     }
 }

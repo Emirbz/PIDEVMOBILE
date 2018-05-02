@@ -11,14 +11,22 @@ import com.codename1.ui.Label;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BoxLayout;
 import PIDEV.Entities.Deal;
+import PIDEV.Entities.Reclamation;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.InteractionDialog;
+import com.codename1.ui.Button;
 import static com.codename1.ui.CN.convertToPixels;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Slider;
+import com.codename1.ui.TextField;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 
@@ -46,17 +54,53 @@ public class DealDetails {
         Container ratc = new Container(BoxLayout.x());
 
         Label ratlabel = new Label("Rating:");
-
+        Button rateme = new Button("Evaluer");
         ratc.add(ratlabel);
         ratc.add(rat);
+        ratc.add(rateme);
+        Button rec = new Button("Réclamer");
+        rec.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+//                Message m=new Message("test");
+//                Display.getInstance().sendMessage(new String[] {"skander.chamakhi@gmail.com"}, "subject", m);
 
+                InteractionDialog dlg = new InteractionDialog("Réclamer");
+                dlg.setLayout(new BorderLayout());
+                Container c = new Container();
+                TextField t = new TextField("", "Contenu");
+                c.add(t);
+                dlg.add(BorderLayout.CENTER, c);
+                Container de = new Container();
+                Button close = new Button("Close");
+                Button reclam = new Button("Réclamer");
+                de.add(close);
+                de.add(reclam);
+                close.addActionListener((ee) -> dlg.dispose());
+                dlg.addComponent(BorderLayout.SOUTH, de);
+                reclam.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        Reclamation r = new Reclamation();
+                        r.setIdobj(d.getId());
+                        r.setTypeobj(d.getClass().getName().substring(15, d.getClass().getName().length()));
+                        r.setContenu(t.getText());
+                        Addreclamation ad = new Addreclamation();
+                        ad.add(r);
+                        dlg.dispose();
+                    }
+                });
+                dlg.show(20, 20, 10, 10);
+            }
+        });
         propertyDetails.add(new Label("Nom : " + title, "LargeTitle")).
                 add(new Label("Prix : " + price_formatted, "SecondaryTitle")).
                 add(img1).
                 add("Adresse :\n" + adresse).
+                add(ratc).
                 add("Région : \n" + region).
-                add("Description : \n" + summary);
-        propertyDetails.add(ratc);
+                add("Description : \n" + summary).
+                add(rec);
         propertyDetails.show();
     }
 

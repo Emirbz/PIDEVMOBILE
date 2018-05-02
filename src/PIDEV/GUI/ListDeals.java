@@ -132,11 +132,14 @@ public class ListDeals {
             details.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-//                    DealDetails DD = new DealDetails();
-//                    DD.showPropertyDetails(e);
-                    UpdateDeal ud = new UpdateDeal();
-                    ud.getoldValues(e);
-                    ud.getF().show();
+                    DealDetails DD = new DealDetails();
+                    DD.showPropertyDetails(e);
+//                    UpdateDeal ud = new UpdateDeal();
+//                    ud.getoldValues(e);
+//                    ud.getF().show();
+//                    DeleteDeal dl = new DeleteDeal();
+//                    dl.DeleteDeal(e);
+//                    new NewsfeedForm(theme).show();   
                 }
             });
             int fontSize = Display.getInstance().convertToPixels(3);

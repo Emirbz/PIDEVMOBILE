@@ -6,8 +6,12 @@
             <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/GUI/CleanModern.java</file>
             <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/GUI/AddDeal.java</file>
             <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/Services/DealService.java</file>
-            <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/GUI/DealDetails.java</file>
             <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/GUI/ListDeals.java</file>
+            <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/GUI/BaseForm.java</file>
+            <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/GUI/DealDetails.java</file>
+            <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/GUI/DeleteDeal.java</file>
+            <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/GUI/UpdateDeal.java</file>
+            <file>file:/C:/Users/Skan/Documents/NetBeansProjects/PiMobile/src/PIDEV/GUI/Addreclamation.java</file>
         </group>
     </open-files>
 </project-private>
