@@ -390,4 +390,11 @@ review.addActionListener(new ActionListener() {
         return starRank;
     }
 
-    private void initStarRankStyle(Sty
+    private void initStarRankStyle(Style s, Image star) {
+        s.setBackgroundType(Style.BACKGROUND_IMAGE_TILE_BOTH);
+        s.setBorder(Border.createEmpty());
+        s.setBgImage(star);
+        s.setBgTransparency(0);
+    }
+    
+}

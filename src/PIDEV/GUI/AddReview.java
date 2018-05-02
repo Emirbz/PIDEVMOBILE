@@ -74,15 +74,15 @@ public class AddReview extends BaseForm {
         String url = "http://localhost/PIDEV/web/devis/" + e.getDevis_name();
         String thumb = "http://localhost/PIDEV/web/devis/" + e.getDevis_name();
         URLImage thumbImage = URLImage.createToStorage(encImagex, url, thumb, URLImage.RESIZE_SCALE_TO_FILL);
-        ScaleImageButton btn = new ScaleImageButton(thumbImage);
-        btn.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-        btn.setUIID("PictureWhiteBackground");
+        ScaleImageButton btnx = new ScaleImageButton(thumbImage);
+        btnx.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        btnx.setUIID("PictureWhiteBackground");
         add(LayeredLayout.encloseIn(
                 sl,
                 BorderLayout.south(
                         GridLayout.encloseIn(1,
                                 FlowLayout.encloseCenter(
-                                        btn
+                                        btnx
                         )
                 )
         )));
