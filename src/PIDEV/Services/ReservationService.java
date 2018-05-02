@@ -47,7 +47,7 @@ public class ReservationService {
                 LinkedHashMap<String, List<Object>> etab = (LinkedHashMap<String, List<Object>>) obj.get("idEtablissement");
                 List<List<Object>> l = new ArrayList<List<Object>>(etab.values());
                 Etablissement et = new Etablissement();
-                et.setDevis_name(String.valueOf(l.get(35)));
+                et.setDevis_name(String.valueOf(l.get(25)));
 //                et.setImg1(String.valueOf(l.get(36)));
 //                et.setImg2(String.valueOf(l.get(37)));
 //                et.setImg3(String.valueOf(l.get(38)));

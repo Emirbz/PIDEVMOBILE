@@ -46,6 +46,13 @@ public class UserService {
                 user.setId((int) id);
                 //e.setId(Integer.parseInt(obj.get("id").toString().trim()));
                 user.setName(obj.get("name").toString());
+                user.setUsername(obj.get("username").toString());
+                user.setUsername_canonical(obj.get("usernameCanonical").toString());
+                user.setEmail_canonical(obj.get("emailCanonical").toString());
+                user.setAddress(obj.get("address").toString());
+                user.setFacebook(obj.get("facebook").toString());
+                user.setPhone(obj.get("phone").toString());
+               
                 user.setSurname(obj.get("surname").toString());
                 System.out.println(user.toString());
                 //Main.user= user;

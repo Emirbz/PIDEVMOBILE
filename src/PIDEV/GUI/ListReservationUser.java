@@ -9,10 +9,17 @@ import PIDEV.Entities.Etablissement;
 import PIDEV.Entities.Reservation;
 import PIDEV.Services.ListEtablissementService;
 import PIDEV.Services.ReservationService;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
+import com.cloudinary.utils.ObjectUtils;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.ScaleImageButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
+import com.codename1.io.File;
+import com.codename1.io.Storage;
+import com.codename1.io.Util;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.Component;
@@ -41,6 +48,9 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
 /**
  *
@@ -55,10 +65,10 @@ public class ListReservationUser extends BaseForm {
     Label date;
     Container c = new Container(BoxLayout.y());
 
-    public ListReservationUser(Resources res) {
+    public ListReservationUser(Resources res) throws IOException {
 //        f = new Form("Liste Reservation", BoxLayout.y());
 //        Container c1 = null;
-        
+
         super("Newsfeed", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
@@ -69,9 +79,8 @@ public class ListReservationUser extends BaseForm {
 
         Tabs swipe = new Tabs();
         Label spacer1 = new Label();
-       
-        //  spacer1.getUnselectedStyle().setFont(Poppins);
 
+        //  spacer1.getUnselectedStyle().setFont(Poppins);
         addTab(swipe, res.getImage("profilebg.jpg"), spacer1, "Vos reservations");
 
         swipe.setUIID("Container");
@@ -111,20 +120,22 @@ public class ListReservationUser extends BaseForm {
 
         Component.setSameSize(spacer1);
         add(LayeredLayout.encloseIn(swipe, radioContainer));
-        ReservationService rs=new ReservationService();
+        ReservationService rs = new ReservationService();
         for (Reservation r : rs.getList2(SignInForm.userCon.getId())) {
             Image placeholder = Image.createImage(500, 170);
             EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
             Image imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name(), "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name());
-          // ImageViewer img1 = new ImageViewer(imgUrl);
-            aunomde =new Label(r.getAunomde());
-            nombre =new Label();
-            description =new Label();
+            // ImageViewer img1 = new ImageViewer(imgUrl);
+            System.out.println(r.getEtablissement().getDevis_name());
+            aunomde = new Label(r.getAunomde());
+            nombre = new Label();
+            description = new Label();
             date = new Label();
-  //          addButton(imgUrl, r.getAunomde(), r.getDescription(), String.valueOf(r.getNombre()));
-  add(c);
+            //          addButton(imgUrl, r.getAunomde(), r.getDescription(), String.valueOf(r.getNombre()));
+
         }
-        
+        add(listRes());
+
     }
 
     private void addTab(Tabs swipe, Image img, Label spacer, String text) {
@@ -163,31 +174,54 @@ public class ListReservationUser extends BaseForm {
 
         swipe.addTab("", page1);
     }
-    
-    public Container listRes(){
-        f = new Form("Liste Reservation", BoxLayout.y());
-     //   Container c1 = null;
+
+    public Container listRes() throws IOException {
+        
+   
+   //     Label bokk = new Label("bokkk");
         ReservationService rs = new ReservationService();
         for (Reservation r : rs.getList2(SignInForm.userCon.getId())) {
-            Image placeholder = Image.createImage(500, 170);
+            System.out.println(r.getAunomde());
+
+            Image placeholder = Image.createImage(150, 150);
             EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
-            URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name(), "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name());
+
+        URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name(), "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name(),URLImage.createMaskAdapter(placeholder));
+
+
             ImageViewer img1 = new ImageViewer(imgUrl);
-            aunomde = new Label(r.getAunomde());
-            nombre = new Label(String.valueOf(r.getNombre()));
-            description = new Label(r.getDescription());
+            
+           // URLImage.ImageAdapter ada = URLImage.createMaskAdapter(roundMask);
+          //  URLImage img = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name(), "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name(), ada);
+            //img.fetch();
+        //    ImageViewer img1=new ImageViewer(img);
+            aunomde = new Label("Au Nom de : "+r.getAunomde());
+            aunomde.setUIID("LabelInfos");
+            nombre = new Label("Nombre de places : "+ String.valueOf(r.getNombre()));
+            nombre.setUIID("LabelInfos");
+            description = new Label("Type : " +r.getDescription());
+            description.setUIID("LabelInfos");
             //date = new Label();
-           Container cnt = BorderLayout.west(img1);
-           cnt.add(BorderLayout.CENTER,
-                BoxLayout.encloseY(
-                        aunomde,
-                        nombre,
-                        description
-                ));
-           c.add(cnt);
+            // Container c= BoxLayout.encloseY(aunomde, description, nombre);
+
+            Container image = BoxLayout.encloseX(img1);
+            Container donnee = new Container(BoxLayout.y());
+            donnee.add(aunomde);
+            donnee.add(description);
+            donnee.add(nombre);
+            Container flow= FlowLayout.encloseCenterMiddle(donnee);
+            Container cnt = new Container(BoxLayout.x());
+            cnt.add(image);
+            cnt.add(flow);
+            cnt.setUIID("Container");
+
+            c.add(cnt);
+
         }
+
         return c;
     }
+
     private void addButton(Image img, String title, String description, String nombre) {
         int height = Display.getInstance().convertToPixels(11.5f);
         int width = Display.getInstance().convertToPixels(14f);
@@ -198,10 +232,10 @@ public class ListReservationUser extends BaseForm {
         TextArea ta = new TextArea(title);
         ta.setUIID("NewsTopLine");
         ta.setEditable(false);
-        Label desLabel=new Label("Occasion : " + description);
+        Label desLabel = new Label("Occasion : " + description);
         Style s = new Style(desLabel.getUnselectedStyle());
         s.setFgColor(0xff214f);
-        Label nombreLabel =new Label("Nombre de places : "+ nombre);
+        Label nombreLabel = new Label("Nombre de places : " + nombre);
         Style s1 = new Style(nombreLabel.getUnselectedStyle());
         s1.setFgColor(0xff214f);
 //        Label likes = new Label(likeCount + " Likes  ", "NewsBottomLine");
@@ -220,12 +254,12 @@ public class ListReservationUser extends BaseForm {
         cnt.add(BorderLayout.CENTER,
                 BoxLayout.encloseY(
                         ta,
-//                        BoxLayout.encloseX(likes, comments)
+                        //                        BoxLayout.encloseX(likes, comments)
                         desLabel,
                         nombreLabel
                 ));
-    //   c.add(cnt);
-        
+        //   c.add(cnt);
+
         image.addActionListener(e -> ToastBar.showMessage(title, FontImage.MATERIAL_INFO));
     }
 

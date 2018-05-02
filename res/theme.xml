@@ -76,6 +76,19 @@
         <val key="Button.sel#margin" value="3,3,2,2" />
         <val key="Button.sel#padUnit" value="2,2,2,2" />
         <val key="Button.sel#padding" value="2,2,2,2" />
+        <border key="ButtonImage.border" type="line" millimeters="false" thickness="10.0" color="16777215" />
+        <val key="ButtonImage.derive" value="Button" />
+        <val key="ButtonImage.margin" value="80.0,0.0,0.0,0.0" />
+        <val key="ButtonImage.sel#derive" value="ButtonImage" />
+        <val key="ButtonMenu.align" value="4" />
+        <val key="ButtonMenu.bgColor" value="ff214f" />
+        <border key="ButtonMenu.border" type="rounded" thickness="0.0" arcW="1" arcH="1" color="16720207" />
+        <val key="ButtonMenu.derive" value="Button" />
+        <font key="ButtonMenu.font" type="ttf" face="0" style="0" size="0" name="Poppins-Regular.ttf" family="Poppins-Regular" sizeSettings="4" actualSize="18.0" />
+        <val key="ButtonMenu.margin" value="20.0,20.0,20.0,20.0" />
+        <val key="ButtonMenu.press#derive" value="ButtonMenu" />
+        <val key="ButtonMenu.sel#derive" value="ButtonMenu" />
+        <val key="ButtonMenu.transparency" value="255" />
         <val key="CenterLabel.align" value="4" />
         <val key="CenterLabel.derive" value="Label" />
         <val key="CenterLink.align" value="4" />
@@ -84,6 +97,12 @@
         <val key="CenterLink.padUnit" value="2,2,2,2" />
         <val key="CenterLink.padding" value="2,2,1,1" />
         <val key="CenterLink.transparency" value="0" />
+        <val key="ContainerPaddingTop.derive" value="Container" />
+        <val key="ContainerPaddingTop.padding" value="20.0,20.0,0.0,0.0" />
+        <val key="ContainerTop.derive" value="Container" />
+        <val key="ContainerTop.fgColor" value="222222" />
+        <font key="ContainerTop.font" type="ttf" face="0" style="0" size="0" name="Poppins-Medium.ttf" family="Poppins-Medium" sizeSettings="4" actualSize="13.0" />
+        <val key="ContainerTop.margin" value="0.0,0.0,0.0,0.0" />
         <val key="DatePickerDay.align" value="4" />
         <val key="DatePickerDay.fgColor" value="ffffff" />
         <font key="DatePickerDay.font" type="ttf" face="0" style="0" size="0" name="native:MainThin" family="native:MainThin" sizeSettings="3" actualSize="4.5" />
@@ -123,6 +142,24 @@
         <val key="Label.transparency" value="0" />
         <val key="LabelCenter.align" value="4" />
         <val key="LabelCenter.derive" value="Label" />
+        <val key="LabelContentProfile.align" value="4" />
+        <val key="LabelContentProfile.derive" value="Label" />
+        <val key="LabelContentProfile.fgColor" value="666666" />
+        <font key="LabelContentProfile.font" type="ttf" face="0" style="0" size="0" name="Poppins-Medium.ttf" family="Poppins-Medium" sizeSettings="4" actualSize="14.0" />
+        <val key="LabelInfoProfil.align" value="4" />
+        <val key="LabelInfoProfil.derive" value="LabelInfos" />
+        <font key="LabelInfoProfil.font" type="ttf" face="0" style="0" size="0" name="Poppins-SemiBold.ttf" family="Poppins-SemiBold" sizeSettings="4" actualSize="16.0" />
+        <val key="LabelInfoProfil.padding" value="20.0,0.0,0.0,0.0" />
+        <val key="LabelInfos.align" value="1" />
+        <val key="LabelInfos.derive" value="Label" />
+        <val key="LabelInfos.fgColor" value="222222" />
+        <font key="LabelInfos.font" type="ttf" face="0" style="0" size="0" name="Poppins-Regular.ttf" family="Poppins-Regular" sizeSettings="4" actualSize="13.0" />
+        <val key="LabelInfos.margin" value="2.5,0.0,0.0,0.0" />
+        <val key="LabelInfos.padding" value="0.0,0.0,0.0,0.0" />
+        <val key="LabelUsername.align" value="4" />
+        <val key="LabelUsername.derive" value="Label" />
+        <val key="LabelUsername.fgColor" value="222222" />
+        <font key="LabelUsername.font" type="ttf" face="0" style="0" size="0" name="Poppins-Bold.ttf" family="Poppins-Bold" sizeSettings="4" actualSize="16.0" />
         <val key="LargeWhiteText.align" value="4" />
         <val key="LargeWhiteText.fgColor" value="ffffff" />
         <font key="LargeWhiteText.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.5" />

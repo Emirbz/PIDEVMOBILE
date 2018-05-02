@@ -44,7 +44,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * Sign in UI
  *
@@ -115,7 +114,7 @@ public class SignInForm extends BaseForm {
                         //  EventsList e = new EventsList(theme);
                         //  e.start();
                         //   Profil profil = new Profil(theme);
-                        ListReservationUser news = new ListReservationUser(res);
+                        UserProfileForm news = new UserProfileForm(res);
                         news.show();
 
                     }
