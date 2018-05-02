@@ -7,29 +7,38 @@ package PIDEV.GUI;
 
 import PIDEV.Entities.Etablissement;
 import PIDEV.Services.ProfilRestaurantService;
+import PIDEV.Services.ReviewService;
+import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
+import static com.codename1.ui.CN.convertToPixels;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
+import com.codename1.ui.Font;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.Slider;
 import com.codename1.ui.Tabs;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
+
 
 /**
  *
@@ -143,7 +152,11 @@ public class ProfilResto extends BaseForm {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
              ListReview lr = new ListReview();
-             lr.ListReview();
+                    try {
+                        lr.ListReview(e.getId());
+                    } catch (IOException ex) {
+                        
+                    }
            
                 }
             });
@@ -158,14 +171,62 @@ review.addActionListener(new ActionListener() {
                 }
             });
             Label amentieslabel = new Label("Amenties :");
+             Style amentiesi = new Style(amentieslabel.getUnselectedStyle());
+            amentiesi.setFgColor(0x73879c);
+            FontImage amentiesix = FontImage.createMaterial(FontImage.MATERIAL_SETTINGS, amentiesi);
+            amentieslabel.setIcon(amentiesix);
             amentieslabel.setUIID("label4");
+           
             Label horaires = new Label("Horaires :");
+             Style horairei = new Style(horaires.getUnselectedStyle());
+            horairei.setFgColor(0x73879c);
+            FontImage horaireix = FontImage.createMaterial(FontImage.MATERIAL_TIMER, horairei);
+            horaires.setIcon(horaireix);
             horaires.setUIID("label4");
             Label lundisamedi = new Label("Lundi-Samedi " + e.getLundisamedio() + "-" + e.getLundisamedif());
             Label DimanchLabel = new Label("Dimanche " + e.getDimancheo() + "-" + e.getDimanchef());
 
             lundisamedi.setUIID("Label3");
             DimanchLabel.setUIID("Label3");
+            
+             Label feedback = new Label("FeedBack :");
+            feedback.setUIID("label4");
+              Style feedbacki = new Style(feedback.getUnselectedStyle());
+            feedbacki.setFgColor(0x73879c);
+            FontImage feedbackix = FontImage.createMaterial(FontImage.MATERIAL_STAR, feedbacki);
+            feedback.setIcon(feedbackix);
+            ReviewService rs = new ReviewService();
+            
+            Label moy = new Label("Moyenne de "+rs.getNbrRev(e.getId())+" votes ");
+            moy.setUIID("Label3");
+            
+            String qualiteXX = String.valueOf(e.getMoyqualite());
+            String ServiceXX = String.valueOf(e.getMoyservice());
+
+            Slider qualite = createStarRankSlider(Integer.parseInt(qualiteXX.substring(0, 1)));
+            Slider service = createStarRankSlider(Integer.parseInt(ServiceXX.substring(0, 1)));
+             Container qualitec = new Container(BoxLayout.x());
+           Container servicec = new Container(BoxLayout.x());
+           Label qualitel = new Label("Qualite :");qualitel.setUIID("Label3");
+           Label servicel = new Label("Service :");servicel.setUIID("Label3");
+           qualitec.add(qualitel);qualitec.add(qualite);
+           servicec.add(servicel);servicec.add(service);
+            
+           
+                 Label map = new Label("Location :");
+             Style mapi = new Style(map.getUnselectedStyle());
+            mapi.setFgColor(0x73879c);
+            FontImage mapix = FontImage.createMaterial(FontImage.MATERIAL_TIMER, mapi);
+            map.setIcon(mapix);
+            map.setUIID("label4");
+            FloatingActionButton mapresto = FloatingActionButton.createFAB(FontImage.MATERIAL_PLACE);
+            mapresto.setUIID("label4");
+            mapresto.addActionListener((evt) -> {
+            ProfilMap pm = new ProfilMap();
+            pm.start(e);
+            });
+            
+            
             amenties.add(fumerl);
             amenties.add(fumer);
             amenties.add(parkingl);
@@ -191,14 +252,23 @@ review.addActionListener(new ActionListener() {
             Label galerielabel = new Label("Galerie :");
             galerielabel.setUIID("label4");
             Label title = new Label("Profil de " + e.getName());
+            
+            
+            
             add(title);
             add(img1);
             add(rev);
+            add(feedback);
+            add(moy);
+            add(qualitec);
+            add(servicec);
             add(horaires);
             add(lundisamedi);
             add(DimanchLabel);
             add(amentieslabel);
             add(amenties);
+            add(map);
+            add(mapresto);
             add(galerielabel);
             add(img1x);
             add(img2x);
@@ -250,4 +320,42 @@ review.addActionListener(new ActionListener() {
 
         swipe.addTab("", page1);
     }
+    private Slider createStarRankSlider(int value) {
+        Font fnt = Font.createTrueTypeFont("native:MainLight", "native:MainLight").
+                derive(convertToPixels(2, true), Font.STYLE_PLAIN);
+        Style s = new Style(0xffff33, 0, fnt, (byte) 0);
+        Image fullStar = FontImage.createMaterial(FontImage.MATERIAL_STAR, s).toImage();
+        s.setOpacity(100);
+        s.setFgColor(0);
+        Image emptyStar = FontImage.createMaterial(FontImage.MATERIAL_STAR, s).toImage();
+        Slider starRank = new Slider() {
+            public void refreshTheme(boolean merge) {
+                // special case when changing the theme while the dialog is showing
+                initStarRankStyle(getSliderEmptySelectedStyle(), emptyStar);
+                initStarRankStyle(getSliderEmptyUnselectedStyle(), emptyStar);
+                initStarRankStyle(getSliderFullSelectedStyle(), fullStar);
+                initStarRankStyle(getSliderFullUnselectedStyle(), fullStar);
+            }
+        };
+
+        starRank.setEditable(false);
+       
+        starRank.setMinValue(0);
+        starRank.setMaxValue(5);
+         starRank.setProgress(value);
+        initStarRankStyle(starRank.getSliderEmptySelectedStyle(), emptyStar);
+        initStarRankStyle(starRank.getSliderEmptyUnselectedStyle(), emptyStar);
+        initStarRankStyle(starRank.getSliderFullSelectedStyle(), fullStar);
+        initStarRankStyle(starRank.getSliderFullUnselectedStyle(), fullStar);
+        starRank.setPreferredSize(new Dimension(fullStar.getWidth() * 5, fullStar.getHeight()));
+        return starRank;
+    }
+
+    private void initStarRankStyle(Style s, Image star) {
+        s.setBackgroundType(Style.BACKGROUND_IMAGE_TILE_BOTH);
+        s.setBorder(Border.createEmpty());
+        s.setBgImage(star);
+        s.setBgTransparency(0);
+    }
+    
 }

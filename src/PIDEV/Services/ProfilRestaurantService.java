@@ -62,6 +62,10 @@ public class ProfilRestaurantService {
                  e.setLundisamedif(obj.get("lundisamedif").toString());
                  e.setDimancheo(obj.get("dimancheo").toString());
                  e.setDimanchef(obj.get("dimanchef").toString());
+                   e.setMoyqualite(Double.parseDouble(obj.get("moyqualite").toString()));
+                e.setMoyservice(Double.parseDouble(obj.get("moyservice").toString()));
+                    e.setLatitude(Double.parseDouble(obj.get("latitude").toString()));
+                e.setLongitude(Double.parseDouble(obj.get("longitude").toString()));
                  
                 listEtabs.add(e);
 

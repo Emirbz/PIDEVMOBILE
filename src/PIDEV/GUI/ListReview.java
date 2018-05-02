@@ -5,12 +5,11 @@
  */
 package PIDEV.GUI;
 
-import PIDEV.Entities.Etablissement;
 import PIDEV.Entities.Review;
-import PIDEV.Services.ListEtablissementService;
 import PIDEV.Services.ReviewService;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.ToastBar;
 import static com.codename1.ui.CN.convertToPixels;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
@@ -32,6 +31,8 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
 
+
+
 /**
  *
  * @author Emir
@@ -44,18 +45,24 @@ Label name;
     Container cx = new Container(BoxLayout.y());
     private Resources theme;
 
-    public void ListReview() {
+    public void ListReview(int id) throws IOException {
         theme = UIManager.initFirstTheme("/theme");
         f = new Form("List Review", BoxLayout.y());
         Container c1 = null;
         ReviewService lr = new ReviewService();
-        for (Review e : lr.getList2()) {
+       
+        for (Review e : lr.getList2(id)) {
                FloatingActionButton nextForm = FloatingActionButton.createFAB(FontImage.MATERIAL_DELETE);
                nextForm.addActionListener(new ActionListener() {
                    @Override
                    public void actionPerformed(ActionEvent evt) {
-                lr.deleterev(e.getId());
-                ListReview();
+                lr.deleterev(e.getId(),id);
+                  ToastBar.showMessage("Votre commentaire a été supprimé", FontImage.MATERIAL_INFO);
+                       try {
+                           new ProfilResto(theme,id).show();
+                       } catch (IOException ex) {
+                          
+                       }
                    }
                });
           
@@ -95,6 +102,7 @@ Label name;
 
             Slider qualite = createStarRankSlider(Integer.parseInt(qualiteXX.substring(0, 1)));
             Slider service = createStarRankSlider(Integer.parseInt(ServiceXX.substring(0, 1)));
+            
             System.out.println(Integer.parseInt(qualiteXX.substring(0, 1)));
             cnom.getStyle().setPaddingBottom(2);
 cnom.add(name);
