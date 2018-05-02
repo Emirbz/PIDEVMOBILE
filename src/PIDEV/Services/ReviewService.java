@@ -71,6 +71,8 @@ public ArrayList<Review> getListTask(String json) {
                 System.out.println("7:"+String.valueOf(l.get(7)));
           
                 User sc = new User();
+                  
+                sc.setId(Integer.parseInt(String.valueOf(l.get(9))));
                 sc.setName(String.valueOf(l.get(0)));
                 sc.setSurname(String.valueOf(l.get(1)));
                 sc.setDevis_name(String.valueOf(l.get(6)));
