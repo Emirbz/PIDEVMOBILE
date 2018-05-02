@@ -5,8 +5,9 @@
  */
 package PIDEV.Entities;
 
-import com.codename1.ui.Calendar;
+
 import java.util.Date;
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 
 
@@ -26,9 +27,9 @@ public class Reservation {
     private String aunomde;
     private int nombre;
     private String description;
-    private String date;
+    private Date date;
 
-    public Reservation(User user,Etablissement etablissement,String aunomde, int nombre, String description, String date) {
+    public Reservation(User user,Etablissement etablissement,String aunomde, int nombre, String description, Date date) {
        this.user=user;
         this.etablissement = etablissement;
         this.aunomde = aunomde;
@@ -89,11 +90,11 @@ public class Reservation {
         this.description = description;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
     

@@ -20,6 +20,7 @@ import com.codename1.components.ToastBar;
 import com.codename1.io.File;
 import com.codename1.io.Storage;
 import com.codename1.io.Util;
+import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.Component;
@@ -50,6 +51,7 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -122,7 +124,7 @@ public class ListReservationUser extends BaseForm {
         add(LayeredLayout.encloseIn(swipe, radioContainer));
         ReservationService rs = new ReservationService();
         for (Reservation r : rs.getList2(SignInForm.userCon.getId())) {
-            Image placeholder = Image.createImage(500, 170);
+            Image placeholder = Image.createImage(80, 80);
             EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
             Image imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name(), "http://localhost/PIDEV/web/devis/" + r.getEtablissement().getDevis_name());
             // ImageViewer img1 = new ImageViewer(imgUrl);
@@ -199,6 +201,10 @@ public class ListReservationUser extends BaseForm {
             aunomde.setUIID("LabelInfos");
             nombre = new Label("Nombre de places : "+ String.valueOf(r.getNombre()));
             nombre.setUIID("LabelInfos");
+            Date d = r.getDate();
+            SimpleDateFormat sfd = new SimpleDateFormat("EEE, d MMM yyyy");
+            date = new Label("Date : "+sfd.format(d) );
+            date.setUIID("LabelInfos");
             description = new Label("Type : " +r.getDescription());
             description.setUIID("LabelInfos");
             //date = new Label();
@@ -209,6 +215,7 @@ public class ListReservationUser extends BaseForm {
             donnee.add(aunomde);
             donnee.add(description);
             donnee.add(nombre);
+            donnee.add(date);
             Container flow= FlowLayout.encloseCenterMiddle(donnee);
             Container cnt = new Container(BoxLayout.x());
             cnt.add(image);

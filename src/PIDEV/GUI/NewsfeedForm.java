@@ -58,7 +58,7 @@ public class NewsfeedForm extends BaseForm {
     public NewsfeedForm(Resources res) {
         
         
-        super("Newsfeed", BoxLayout.y());
+        super("Lister", BoxLayout.y());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
