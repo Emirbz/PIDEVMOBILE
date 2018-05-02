@@ -134,23 +134,23 @@ public class UserProfileForm extends BaseForm {
         Label username = new Label(SignInForm.userCon.getUsername_canonical());
         username.setUIID("LabelUsername");
 
-        Label name = new Label("Name : ");
+        Label name = new Label("Name:");
         name.setUIID("LabelInfoProfil");
         Label nameContent = new Label(SignInForm.userCon.getName().toUpperCase().charAt(0)+SignInForm.userCon.getName().substring(1, SignInForm.userCon.getName().length())+" "+SignInForm.userCon.getSurname().toUpperCase().charAt(0)+SignInForm.userCon.getSurname().substring(1, SignInForm.userCon.getSurname().length()));
         nameContent.setUIID("LabelContentProfile");
 
        
-        Label email = new Label("Email : ");
+        Label email = new Label("Email:");
         email.setUIID("LabelInfoProfil");
         Label emailContent = new Label(SignInForm.userCon.getEmail());
         emailContent.setUIID("LabelContentProfile");
 
-        Label phone = new Label("Phone : ");
+        Label phone = new Label("Phone:");
         phone.setUIID("LabelInfoProfil");
         Label phoneContent = new Label(SignInForm.userCon.getPhone());
         phoneContent.setUIID("LabelContentProfile");
 
-        Label address = new Label("Address : ");
+        Label address = new Label("Address:");
         address.setUIID("LabelInfoProfil");
         Label addressContent = new Label(SignInForm.userCon.getAddress());
         addressContent.setUIID("LabelContentProfile");

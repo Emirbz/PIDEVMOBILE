@@ -52,7 +52,7 @@ public class UserService {
                 user.setAddress(obj.get("address").toString());
                 user.setFacebook(obj.get("facebook").toString());
                 user.setPhone(obj.get("phone").toString());
-               
+                user.setDevis_name(obj.get("devisName").toString());
                 user.setSurname(obj.get("surname").toString());
                 System.out.println(user.toString());
                 //Main.user= user;

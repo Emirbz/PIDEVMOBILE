@@ -77,9 +77,7 @@ public class SignInForm extends BaseForm {
         signUp.addActionListener(e -> new SignUpForm(res).show());
         signUp.setUIID("Link");
         Label doneHaveAnAccount = new Label("Don't have an account?");
-        
-        
-        
+
         Container content = BoxLayout.encloseY(
                 username,
                 createLineSeparator(),
@@ -88,7 +86,7 @@ public class SignInForm extends BaseForm {
                 signIn,
                 FlowLayout.encloseCenter(doneHaveAnAccount, signUp)
         );
-        
+
         content.setScrollableY(true);
         add(BorderLayout.SOUTH, content);
         signIn.requestFocus();
@@ -145,7 +143,11 @@ public class SignInForm extends BaseForm {
                     u.setPassword(obj.get("password").toString());
                     u.setDevis_name(obj.get("devisName").toString());
                     u.setUsername(obj.get("username").toString());
-                    
+                    u.setUsername_canonical(obj.get("usernameCanonical").toString());
+                    u.setEmail_canonical(obj.get("emailCanonical").toString());
+                    u.setAddress(obj.get("address").toString());
+                    u.setFacebook(obj.get("facebook").toString());
+                    u.setPhone(obj.get("phone").toString());
                     listEtudiants.add(u);
 
                 }
