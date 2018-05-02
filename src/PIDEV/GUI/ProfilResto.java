@@ -10,6 +10,7 @@ import PIDEV.Services.ProfilRestaurantService;
 import PIDEV.Services.ReviewService;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.ScaleImageButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
@@ -31,6 +32,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Border;
@@ -49,6 +51,7 @@ public class ProfilResto extends BaseForm {
     Label name;
     Label address;
     private Resources theme;
+    private Resources theme2;
 
     public ProfilResto(Resources res, int id) throws IOException {
         
@@ -63,10 +66,38 @@ public class ProfilResto extends BaseForm {
 
         tb.addSearchCommand(e -> {
         });
+        
+         
          theme = UIManager.initFirstTheme("/theme");
 
         ProfilRestaurantService pr = new ProfilRestaurantService();
         for (Etablissement e : pr.getList2(id)) {
+            
+              Image img = res.getImage("profilebg.jpg");
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        Image placeholder = Image.createImage(240, 120);
+        EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
+        String url = "http://localhost/PIDEV/web/devis/" + e.getDevis_name();
+        String thumb = "http://localhost/PIDEV/web/devis/" + e.getDevis_name();
+        URLImage thumbImage = URLImage.createToStorage(encImage, url, thumb, URLImage.RESIZE_SCALE_TO_FILL);
+        ScaleImageButton btn = new ScaleImageButton(thumbImage);
+        btn.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        btn.setUIID("PictureWhiteBackground");
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(1,
+                                FlowLayout.encloseCenter(
+                                        btn
+                        )
+                )
+        )));
+            /////////////
 
             name = new Label();
 
@@ -79,11 +110,11 @@ public class ProfilResto extends BaseForm {
 
             caddress.getStyle().setBgColor(0x99DDD);
             caddress.getStyle().setBgTransparency(150);
-            Image placeholder = Image.createImage(500, 170);
-            EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
-            URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + e.getDevis_name(), "http://localhost/PIDEV/web/devis/" + e.getDevis_name());
-            ImageViewer img1 = new ImageViewer();
-            img1.setImage(imgUrl);
+//            Image placeholder = Image.createImage(500, 170);
+//            EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
+//            URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + e.getDevis_name(), "http://localhost/PIDEV/web/devis/" + e.getDevis_name());
+//            ImageViewer img1 = new ImageViewer();
+//            img1.setImage(imgUrl);
 
             Image placeholder1 = Image.createImage(500, 170);
             EncodedImage encImage1 = EncodedImage.createFromImage(placeholder1, false);
@@ -255,8 +286,7 @@ review.addActionListener(new ActionListener() {
             
             
             
-            add(title);
-            add(img1);
+        
             add(rev);
             add(feedback);
             add(moy);
