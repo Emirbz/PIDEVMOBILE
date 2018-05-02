@@ -5,13 +5,17 @@
  */
 package PIDEV.GUI;
 
+import PIDEV.Entities.Etablissement;
 import PIDEV.Entities.Review;
 import PIDEV.Entities.User;
 import PIDEV.Services.ReviewService;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
+import com.codename1.components.ScaleImageButton;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.ToastBar;
 import static com.codename1.ui.CN.convertToPixels;
+import static com.codename1.ui.CN.getCurrentForm;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
@@ -21,11 +25,16 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.Slider;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
@@ -35,50 +44,91 @@ import java.io.IOException;
 
 
 
+
 /**
  *
  * @author Emir
  */
-public class ListReview {
+public class ListReview extends BaseForm{
      Form f;
     Label titre;
 Label name;
     Label commentaire;
     Container cx = new Container(BoxLayout.y());
-    private Resources theme;
+    
+public ListReview(int id,Etablissement etab,Resources res){
+     
+        super("Newsfeed", BoxLayout.y());
+        Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        setTitle("Liste Review");
+        getContentPane().setScrollVisible(false);
 
-    public void ListReview(int id) throws IOException {
-        theme = UIManager.initFirstTheme("/theme");
-        f = new Form("List Review", BoxLayout.y());
+        super.addSideMenu(res);
+          FloatingActionButton back = FloatingActionButton.createFAB(FontImage.MATERIAL_BACKUP);
+           Form previous = getCurrentForm();
+        tb.setBackCommand("", (e) -> {
+            previous.showBack();
+        });
+   
+         ReviewService lr = new ReviewService();
+            Image img = res.getImage("profilebg.jpg");
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        Image placeholderx = Image.createImage(240, 120);
+        EncodedImage encImagex = EncodedImage.createFromImage(placeholderx, false);
+        String url = "http://localhost/PIDEV/web/devis/" + etab.getDevis_name();
+        String thumb = "http://localhost/PIDEV/web/devis/" + etab.getDevis_name();
+        URLImage thumbImage = URLImage.createToStorage(encImagex, url, thumb, URLImage.RESIZE_SCALE_TO_FILL);
+        ScaleImageButton btn = new ScaleImageButton(thumbImage);
+        btn.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        btn.setUIID("PictureWhiteBackground");
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(1,
+                                FlowLayout.encloseCenter(
+                                        btn
+                        )
+                )
+        )));
+        
+        
         Container c1 = null;
-        ReviewService lr = new ReviewService();
+        
          
         for (Review e : lr.getList2(id)) {
             User x =SignInForm.userCon;
                FloatingActionButton nextForm = FloatingActionButton.createFAB(FontImage.MATERIAL_DELETE);
-               System.out.println("id user "+e.getIduser().getId());
-             
+                                  if(e.getIduser().getId()!=x.getId())
+                                  {
+                                      nextForm.setVisible(false);
+                                  }
               
                nextForm.addActionListener(new ActionListener() {
                    @Override
                    public void actionPerformed(ActionEvent evt) {
+                
+             
                     
-                    if( x==null ||e.getId()!=x.getId())
-                    {
-                         ToastBar.showMessage("Il ne s'agit pas de votre FeedBack", FontImage.MATERIAL_INFO);
-                    }
-                    else
-                       
-                    {
-                           
-                lr.deleterev(e.getId(),id);
-                  ToastBar.showMessage("Votre commentaire a été supprimé", FontImage.MATERIAL_INFO);
+                        
+                        lr.deleterev(e.getId(),id);
+                        ToastBar.showMessage("Votre commentaire a été supprimé", FontImage.MATERIAL_INFO);
                        try {
-                           new ProfilResto(theme,id).show();
+                           new ProfilResto(res,id).show();
                        } catch (IOException ex) {
                           
-                       }}
-                   }
+                       }
+}
+                
+                       
+                   
+                   
                });
           
             Image placeholder = Image.createImage(350, 150);
@@ -141,14 +191,13 @@ commentaire.setText(e.getCommentaire());
             c1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             c1.getStyle().setPaddingBottom(20);
 
-            c1.add(img1);
+            add(img1);
 
-            c1.add(cnom);
+            add(cnom);
 
 //            c1.add(details);
            
-            f.add(c1);
-                    f.show();
+            
          
 
         }

@@ -17,12 +17,14 @@ import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.convertToPixels;
+import static com.codename1.ui.CN.getCurrentForm;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.Slider;
@@ -61,10 +63,14 @@ public class ProfilResto extends BaseForm {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Profile");
+        setTitle(" Profil");
         getContentPane().setScrollVisible(false);
 
         super.addSideMenu(res);
+         Form previous = getCurrentForm();
+        tb.setBackCommand("", (e) -> {
+            previous.showBack();
+        });
 
        
          
@@ -184,13 +190,9 @@ public class ProfilResto extends BaseForm {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
                 
-                        ListReview lr = new ListReview();
+                       new ListReview(e.getId(), e, theme).show();
                 
-                    try {
-                        lr.ListReview(e.getId());
-                    } catch (IOException ex) {
-                      
-                    }
+                    
                  
            
                 }
@@ -388,11 +390,4 @@ review.addActionListener(new ActionListener() {
         return starRank;
     }
 
-    private void initStarRankStyle(Style s, Image star) {
-        s.setBackgroundType(Style.BACKGROUND_IMAGE_TILE_BOTH);
-        s.setBorder(Border.createEmpty());
-        s.setBgImage(star);
-        s.setBgTransparency(0);
-    }
-    
-}
+    private void initStarRankStyle(Sty

@@ -8,11 +8,16 @@ package PIDEV.GUI;
 import PIDEV.Entities.Etablissement;
 import PIDEV.Entities.Review;
 import PIDEV.Services.ReviewService;
+import com.codename1.components.ScaleImageButton;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import static com.codename1.ui.CN.convertToPixels;
+import static com.codename1.ui.CN.getCurrentForm;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -22,10 +27,13 @@ import com.codename1.ui.RadioButton;
 import com.codename1.ui.Slider;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Border;
@@ -50,6 +58,35 @@ public class AddReview extends BaseForm {
         setTitle("");
         getContentPane().setScrollVisible(false);
          super.addSideMenu(res);
+          Form previous = getCurrentForm();
+        tb.setBackCommand("", (ev) -> {
+            previous.showBack();
+        });
+        Image img = res.getImage("profilebg.jpg");
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        Image placeholderx = Image.createImage(240, 120);
+        EncodedImage encImagex = EncodedImage.createFromImage(placeholderx, false);
+        String url = "http://localhost/PIDEV/web/devis/" + e.getDevis_name();
+        String thumb = "http://localhost/PIDEV/web/devis/" + e.getDevis_name();
+        URLImage thumbImage = URLImage.createToStorage(encImagex, url, thumb, URLImage.RESIZE_SCALE_TO_FILL);
+        ScaleImageButton btn = new ScaleImageButton(thumbImage);
+        btn.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        btn.setUIID("PictureWhiteBackground");
+        add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(1,
+                                FlowLayout.encloseCenter(
+                                        btn
+                        )
+                )
+        )));
+        
 
         
 
