@@ -16,7 +16,8 @@ public class Addrating {
 
     public void ajoutTask(Note ta) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://localhost/pidev/web/app_dev.php/deals/ajs/" ;
+        String Url = "http://localhost/pidev/web/app_dev.php/deals/ratej?iddeal="+ta.getIddeal()+"&rating="+ta.getRating()
+                +"&iduser="+ta.getIduser() ;
         con.setUrl(Url);
         con.addResponseListener((e) -> {
             String str = new String(con.getResponseData());

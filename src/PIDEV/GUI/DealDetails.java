@@ -27,6 +27,7 @@ import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 
@@ -76,9 +77,9 @@ public class DealDetails {
                 Button reclam = new Button("Réclamer");
                 de.add(close);
                 de.add(reclam);
-                c.add(ttt);
+                c.add(FlowLayout.encloseCenter(ttt));
+                dlg.add(BorderLayout.SOUTH,de);
                 close.addActionListener((ee) -> dlg.dispose());
-                dlg.addComponent(de);
                 reclam.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent evt) {
@@ -86,7 +87,8 @@ public class DealDetails {
                         n.setIddeal(d.getId());
                         n.setIduser(4);
                         n.setRating(ttt.getProgress());
-                        
+                        Addrating ar=new Addrating();
+                        ar.ajoutTask(n);
                         dlg.dispose();
                     }
                 });
