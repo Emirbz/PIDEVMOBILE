@@ -49,9 +49,9 @@ public class CleanModern {
             current.show();
             return;
         }
-        new NewsfeedForm(theme).show();
-//        AddDeal ad=new AddDeal();
-//        ad.getF().show();
+       // new NewsfeedForm(theme).show();
+        AddDeal ad=new AddDeal();
+        ad.getF().show();
     }
 
     public void stop() {

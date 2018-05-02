@@ -126,29 +126,26 @@ public class AddDeal {
 //                }, GALLERY_IMAGE);
 //            }
 //        });
-       Button modifImageBtn = new Button("modifier image");
-        ImageViewer imageUser=new ImageViewer();
-           
-            EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(100, 100), true);
-            imageUser.setImage(URLImage.createToStorage(placeholder, "http://localhost/pidev/web/devis/5a8b1ad45fe17.png", "http://localhost/pidev/web/devis/5a8b1ad45fe17.png"));
-           
-        
+        Button modifImageBtn = new Button("modifier image");
+        ImageViewer imageUser = new ImageViewer();
+
+        EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(100, 100), true);
+        imageUser.setImage(URLImage.createToStorage(placeholder, "http://localhost/pidev/web/devis/5a8b1ad45fe17.png", "http://localhost/pidev/web/devis/5a8b1ad45fe17.png"));
+
         modifImageBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
+                try {
                     FileUploader fu = new FileUploader("http://localhost/pidev/web/");
-                    
+
                     //Upload
-                    
                     Display.getInstance().openGallery(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent v) {
-                           
-                            
-                            String filePath = ((String)v.getSource()).substring(7);
+
+                            String filePath = ((String) v.getSource()).substring(7);
                             System.out.println(filePath);
-                            String fileNameInServer ="";
+                            String fileNameInServer = "";
                             try {
                                 fileNameInServer = fu.upload(filePath);
 //                               if(!userSession.getPhoto().equals("default0d.jpg")){
@@ -162,22 +159,18 @@ public class AddDeal {
 //                                   }
 //                               
 //                               }
-                                
-                             imgname=fileNameInServer;
-                               
-                                
+
+                                imgname = fileNameInServer;
+
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
-                                System.out.println(fileNameInServer);
-                                 
-                               
-                          
+                            System.out.println(fileNameInServer);
+
                         }
                     }, Display.GALLERY_IMAGE);
-                    
-                    
-                }catch(Exception ex){
+
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 /*  FosUser user = new FosUser(1,
@@ -192,10 +185,10 @@ public class AddDeal {
                 
                 new userService().inscriptionSimple(user);
                 
-                */
+                 */
             }
         });
-        
+
         f.add(imageUser);
         f.add(modifImageBtn);
         Button btn = new Button("Valider");
@@ -236,6 +229,7 @@ public class AddDeal {
                 d.setPromotion(Double.parseDouble(promotion.getText()));
                 d.setPlacesdispo(Integer.parseInt(places.getText()));
                 Date date = datef.getDate();
+                System.out.println(date);
                 d.setDatefin(date);
                 d.setDevisName(imgname);
                 ajoutTask(d);
