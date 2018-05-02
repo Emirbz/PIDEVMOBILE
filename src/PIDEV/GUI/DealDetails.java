@@ -29,6 +29,7 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
+import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Border;
@@ -38,19 +39,17 @@ import com.codename1.ui.plaf.Style;
  *
  * @author Skan
  */
-public class DealDetails extends BaseForm {
+public class DealDetails {
 
     void showPropertyDetails(Deal d) {
         final Form propertyDetails = new Form("Property Details", new BoxLayout(BoxLayout.Y_AXIS));
         Toolbar tb = new Toolbar(true);
-        setToolbar(tb);
-        getTitleArea().setUIID("Container");
-        setTitle(d.getNom());
-        getContentPane().setScrollVisible(false);
+        propertyDetails.setToolbar(tb);
+        propertyDetails.getTitleArea().setUIID("Container");
+        propertyDetails.setTitle(d.getNom());
+        propertyDetails.getContentPane().setScrollVisible(false);
         String price_formatted = d.getNewprix().toString();
-        String title = d.getNom();
         String summary = d.getDescription();
-
         Image placeholder = Image.createImage(350, 200);
         EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
         URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + d.getDevisName(),
@@ -144,8 +143,7 @@ public class DealDetails extends BaseForm {
 
         });
 
-        propertyDetails.add(new Label("Nom : " + title, "LargeTitle")).
-                add(new Label("Prix : " + price_formatted, "SecondaryTitle")).
+        propertyDetails.add(new Label("Prix : " + price_formatted, "SecondaryTitle")).
                 add(img1).
                 add("Adresse :\n" + adresse).
                 add(ratc).
