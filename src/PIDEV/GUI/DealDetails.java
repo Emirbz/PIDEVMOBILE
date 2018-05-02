@@ -15,6 +15,7 @@ import PIDEV.Entities.Note;
 import PIDEV.Entities.Reclamation;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.InteractionDialog;
+import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.convertToPixels;
 import com.codename1.ui.Container;
@@ -74,11 +75,13 @@ public class DealDetails {
                 Container de = new Container(BoxLayout.x());
                 Slider ttt = createStarRankSlider();
                 Button close = new Button("Close");
-                Button reclam = new Button("Réclamer");
+                Button reclam = new Button("Evaluer");
+                close.setWidth(150);
+                reclam.setWidth(150);
                 de.add(close);
                 de.add(reclam);
                 c.add(FlowLayout.encloseCenter(ttt));
-                dlg.add(BorderLayout.SOUTH,de);
+                dlg.add(BorderLayout.SOUTH, de);
                 close.addActionListener((ee) -> dlg.dispose());
                 reclam.addActionListener(new ActionListener() {
                     @Override
@@ -86,10 +89,11 @@ public class DealDetails {
                         Note n = new Note();
                         n.setIddeal(d.getId());
                         n.setIduser(4);
-                        n.setRating(ttt.getProgress());
-                        Addrating ar=new Addrating();
+                        n.setRating(ttt.getProgress() / 2);
+                        Addrating ar = new Addrating();
                         ar.ajoutTask(n);
                         dlg.dispose();
+                        ToastBar.showMessage("Votre évaluation est enregistré", FontImage.MATERIAL_STAR);
                     }
                 });
                 dlg.show(30, 30, 30, 30);
@@ -126,6 +130,7 @@ public class DealDetails {
                         Addreclamation ad = new Addreclamation();
                         ad.add(r);
                         dlg.dispose();
+                        ToastBar.showMessage("Votre réclamation sera traité par l'admin", FontImage.MATERIAL_MESSAGE);
                     }
                 });
                 dlg.show(30, 30, 30, 30);
