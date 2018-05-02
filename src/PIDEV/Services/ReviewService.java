@@ -68,11 +68,11 @@ public ArrayList<Review> getListTask(String json) {
 
                 List<List<Object>> l = new ArrayList<>(cc.values());
  
-                System.out.println("7:"+String.valueOf(l.get(7)));
+               
           
                 User sc = new User();
-                  
-                sc.setId(Integer.parseInt(String.valueOf(l.get(9))));
+                   float iduser = Float.parseFloat(l.get(8).toString());
+                    sc.setId((int) iduser);
                 sc.setName(String.valueOf(l.get(0)));
                 sc.setSurname(String.valueOf(l.get(1)));
                 sc.setDevis_name(String.valueOf(l.get(6)));
