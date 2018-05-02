@@ -52,6 +52,7 @@ import java.util.Map;
  */
 public class SignInForm extends BaseForm {
      private Resources theme;
+     private Resources theme2;
 
    
        
@@ -70,9 +71,11 @@ public class SignInForm extends BaseForm {
         getTitleArea().setUIID("Container");
         setUIID("SignIn");
  theme = UIManager.initFirstTheme("/theme");
+ theme2 = UIManager.initFirstTheme("/theme2");
         add(BorderLayout.NORTH, new Label(res.getImage("logo-v1.png"), "LogoLabel"));
 
         TextField username = new TextField("", "Username", 20, TextField.ANY);
+  
 
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
 

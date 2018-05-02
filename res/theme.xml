@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<resource majorVersion="1" minorVersion="7" useXmlUI="false">
+<resource majorVersion="1" minorVersion="9" useXmlUI="false">
     <image name="15919034-woman-face-treatment-in-medical-spa-center.jpg"  />
     <image name="activation-background.jpg"  />
     <image name="back.png"  />
@@ -16,6 +16,7 @@
     <image name="facebook-logo.png" type="multi"  />
     <image name="img2.jpg"  />
     <image name="img6.jpg"  />
+    <image name="logo-v1.png"  />
     <image name="Logo.png" type="multi"  />
     <image name="news-item-1.jpg"  />
     <image name="news-item-2.jpg"  />
@@ -251,9 +252,9 @@
         <val key="SideNavigationPanel.transparency" value="255" />
         <val key="SignIn.bgImage" value="signin-background.jpg" />
         <val key="SignIn.bgType" value="33" />
-        <val key="SignIn.margin" value="0,0,0,0" />
+        <val key="SignIn.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SignIn.padUnit" value="0,0,2,0" />
-        <val key="SignIn.padding" value="0,3,0,0" />
+        <val key="SignIn.padding" value="0.0,3.0,0.0,0.0" />
         <val key="SignIn.transparency" value="255" />
         <val key="SkipButton.fgColor" value="a2a1b8" />
         <font key="SkipButton.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.5" />
@@ -279,12 +280,11 @@
         <val key="TEXTFIILD.derive" value="TextField" />
         <val key="TEXTFIILD.fgColor" value="0" />
         <val key="TEXTFIILD.transparency" value="0" />
-        <val key="TextField.sel#align" value="4" />
+        <border key="TextField.border" type="empty" />
+        <val key="TextField.derive" value="TextField" />
         <border key="TextField.sel#border" type="empty" />
         <val key="TextField.sel#fgColor" value="ffffff" />
-        <val key="TextField.sel#margin" value="0,0,0,0" />
-        <val key="TextField.sel#padUnit" value="2,2,2,2" />
-        <val key="TextField.sel#padding" value="3,3,2,2" />
+        <val key="TextField.sel#padding" value="2.0,2.0,2.0,2.0" />
         <val key="TextField.sel#transparency" value="0" />
         <val key="TextFieldBlack.align" value="3" />
         <border key="TextFieldBlack.border" type="empty" />
