@@ -24,6 +24,7 @@ import com.codename1.googlemaps.MapContainer;
 import com.codename1.googlemaps.MapContainer.MapObject;
 import com.codename1.maps.Coord;
 import com.codename1.ui.Button;
+import static com.codename1.ui.CN.getCurrentForm;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
@@ -117,6 +118,11 @@ public class GoogleMapsTestApp {
                 }
             });
         }
+        hi.setUIID("Label");
+     Form previous = getCurrentForm();
+        hi.getToolbar().setBackCommand("", (e) -> {
+            previous.showBack();
+        });
         hi.show();
         
     }
