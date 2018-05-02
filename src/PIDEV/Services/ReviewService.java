@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import PIDEV.GUI.SignInForm;
 
 /**
  *
@@ -29,7 +30,7 @@ public class ReviewService {
       public void AddReview(Review ta) {
         ConnectionRequest con = new ConnectionRequest();
         String Url = "http://localhost/PIDEV/web/app_dev.php/amir/ajout_review_json?qualite=" + ta.getQualite()+ "&service=" + ta.getService()
-                + "&commentaire=" + ta.getCommentaire() + "&titre=" + ta.getTitre() + "&id=" + ta.getIdetab().getId();
+                + "&commentaire=" + ta.getCommentaire() + "&titre=" + ta.getTitre() + "&id=" + ta.getIdetab().getId()+"$iduser="+SignInForm.userCon.getId();
         con.setUrl(Url);
         System.out.println(Url);
           System.out.println("ID ETAB"+ta.getIdetab().getId());
