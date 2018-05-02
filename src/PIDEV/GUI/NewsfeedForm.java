@@ -171,13 +171,12 @@ public class NewsfeedForm extends BaseForm {
 ListEtablissementService le = new ListEtablissementService();
         ArrayList<SousCategorie> cats = le.getListsouscat();
         Picker cat = new Picker();
-//        String ses[] = new String[le.getListsouscat().size()];
-//        for (int i=0;i<le.getListsouscat().size();i++)
-//        {ses[i] = cats.get(i).getNom();}
- String ses[] = new String[2];
+        String ses[] = new String[le.getListsouscat().size()];
+        for (int i=0;i<le.getListsouscat().size();i++)
+        {ses[i] = cats.get(i).getNom();}
+ 
 
-        ses[0] = "Lounge";
-                ses[1]="zzzz";
+        
                 
         Button go = new Button("Filter");
         
@@ -208,11 +207,11 @@ gm.start();
                 go.addActionListener(new ActionListener() {
                       @Override
                       public void actionPerformed(ActionEvent evt) {
-                       tou.removeAll();
-                          System.out.println("tremova");
+                
+                          tou.add(filter);
                        
-                           toufilter.add(lr.ListRestoTrie(cat.getSelectedString())); /////////zab
-                           add(toufilter);
+                           tou.add(lr.ListRestoTrie(cat.getSelectedString())); /////////zab
+                           
                       }
                   });
                

@@ -139,6 +139,14 @@ public class ProfilResto extends BaseForm {
             Button review = new Button("Donner Avis");
             review.setUIID("Button");
             Button listreview = new Button("Liste des  Avis");
+            listreview.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+             ListReview lr = new ListReview();
+             lr.ListReview();
+           
+                }
+            });
             listreview.setUIID("Button");
             Container rev = new Container(BoxLayout.x());
             rev.add(review);
