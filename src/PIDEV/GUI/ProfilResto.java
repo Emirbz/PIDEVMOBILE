@@ -6,6 +6,7 @@
 package PIDEV.GUI;
 
 import PIDEV.Entities.Etablissement;
+import PIDEV.Entities.User;
 import PIDEV.Services.ProfilRestaurantService;
 import PIDEV.Services.ReviewService;
 import com.codename1.components.FloatingActionButton;
@@ -13,6 +14,7 @@ import com.codename1.components.ImageViewer;
 import com.codename1.components.ScaleImageButton;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.SpanLabel;
+import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.convertToPixels;
 import com.codename1.ui.CheckBox;
@@ -40,6 +42,8 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -177,15 +181,22 @@ public class ProfilResto extends BaseForm {
             Button review = new Button("Donner Avis");
             review.setUIID("Button");
             Button listreview = new Button("Liste des  Avis");
+            User x =SignInForm.userCon;
+            ListReview lr = new ListReview();
             listreview.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-             ListReview lr = new ListReview();
-                    try {
-                        lr.ListReview(e.getId());
-                    } catch (IOException ex) {
+                    if (x==null)
+                    { ToastBar.showMessage("Veuillez Connecter pour ajouter un FeedBack", FontImage.MATERIAL_INFO);}
+                    else
                         
+                   
+                        try {
+                            lr.ListReview(e.getId());
+                    } catch (IOException ex) {
+                        Logger.getLogger(ProfilResto.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
            
                 }
             });

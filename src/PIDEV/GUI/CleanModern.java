@@ -50,9 +50,10 @@ public class CleanModern {
         if(current != null){
             current.show();
             return;
-        }  new SignInForm(theme).show();
+        } 
+//        new SignInForm(theme).show();
         
-//        new NewsfeedForm(theme).show();
+        new NewsfeedForm(theme).show();
     }
 
     public void stop() {
