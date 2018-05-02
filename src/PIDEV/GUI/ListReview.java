@@ -57,15 +57,12 @@ Label name;
             User x =SignInForm.userCon;
                FloatingActionButton nextForm = FloatingActionButton.createFAB(FontImage.MATERIAL_DELETE);
              
-               {nextForm.setVisible(false);
-                       
-                       }
+              
                nextForm.addActionListener(new ActionListener() {
                    @Override
                    public void actionPerformed(ActionEvent evt) {
-                       System.out.println("1");
-                       System.out.println(x.getId());
-                       System.out.println(e.getIduser().getId());
+                    
+                       System.out.println("id user"+e.getIduser().getId());
                       if ( e.getId()!=x.getId())
                     { ToastBar.showMessage("Il ne s'agit pas de votre FeedBack", FontImage.MATERIAL_INFO);}
                        else
