@@ -57,7 +57,7 @@ public class SignInForm extends BaseForm {
    
        
 
-    public static User userCon;
+    public static User userCon=null;
 
     public SignInForm(Resources res) {
         

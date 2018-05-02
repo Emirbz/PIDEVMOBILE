@@ -42,8 +42,6 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -182,21 +180,18 @@ public class ProfilResto extends BaseForm {
             review.setUIID("Button");
             Button listreview = new Button("Liste des  Avis");
             User x =SignInForm.userCon;
-            ListReview lr = new ListReview();
             listreview.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    if (x==null)
-                    { ToastBar.showMessage("Veuillez Connecter pour ajouter un FeedBack", FontImage.MATERIAL_INFO);}
-                    else
-                        
-                   
-                        try {
-                            lr.ListReview(e.getId());
+                
+                        ListReview lr = new ListReview();
+                
+                    try {
+                        lr.ListReview(e.getId());
                     } catch (IOException ex) {
-                        Logger.getLogger(ProfilResto.class.getName()).log(Level.SEVERE, null, ex);
+                      
                     }
-                    
+                 
            
                 }
             });
@@ -207,7 +202,10 @@ public class ProfilResto extends BaseForm {
 review.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-      new AddReview(e,theme).show();
+                     if (x==null)
+                    { ToastBar.showMessage("Veuillez Connecter pour ajouter un FeedBack", FontImage.MATERIAL_INFO);}
+                     else
+                     { new AddReview(e,theme).show();}
                 }
             });
             Label amentieslabel = new Label("Amenties :");
