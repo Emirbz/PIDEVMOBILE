@@ -82,8 +82,8 @@ public class Statistic {
         renderer.setShowLabels(true);
         SimpleSeriesRenderer r = renderer.getSeriesRendererAt(0);
         r.setGradientEnabled(true);
-        r.setGradientStart(0, ColorUtil.BLUE);
-        r.setGradientStop(0, ColorUtil.GREEN);
+        r.setGradientStart(0, ColorUtil.MAGENTA);
+        r.setGradientStop(0, ColorUtil.CYAN);
         r.setHighlighted(true);
 
         // Create the chart ... pass the values and renderer to the chart object.
