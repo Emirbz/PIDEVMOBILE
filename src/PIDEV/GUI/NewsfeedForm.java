@@ -74,6 +74,8 @@ public class NewsfeedForm extends BaseForm {
         tb.addSearchCommand(e -> {
         });
         
+        
+        
 
         Font Poppins = Font.createTrueTypeFont("Poppins", "Poppins-Bold.ttf");
         Poppins = Poppins.derive(14, Font.STYLE_PLAIN);
