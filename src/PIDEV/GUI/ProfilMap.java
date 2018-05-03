@@ -67,8 +67,8 @@ public class ProfilMap extends BaseForm {
         getContentPane().setScrollVisible(false);
 
        
-          FloatingActionButton back = FloatingActionButton.createFAB(FontImage.MATERIAL_BACKUP);
-           Form previous = getCurrentForm();
+           super.addSideMenu(res);
+         Form previous = getCurrentForm();
         tb.setBackCommand("", (e) -> {
             previous.showBack();
         });

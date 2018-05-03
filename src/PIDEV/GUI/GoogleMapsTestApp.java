@@ -66,9 +66,8 @@ public class GoogleMapsTestApp extends BaseForm {
         setTitle("Liste Review");
         getContentPane().setScrollVisible(false);
 
-        super.addSideMenu(res);
-         
-           Form previous = getCurrentForm();
+       super.addSideMenu(res);
+         Form previous = getCurrentForm();
         tb.setBackCommand("", (e) -> {
             previous.showBack();
         });
