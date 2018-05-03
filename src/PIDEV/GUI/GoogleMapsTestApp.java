@@ -35,14 +35,13 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
 
-public class GoogleMapsTestApp extends BaseForm {
+public class GoogleMapsTestApp {
 
     private static final String HTML_API_KEY = "AIzaSyBWeRU02YUYPdwRuMFyTKIXUbHjq6e35Gw";
     private Form current;
@@ -58,24 +57,24 @@ public class GoogleMapsTestApp extends BaseForm {
         }
     }
     MapObject sydney;
-    public GoogleMapsTestApp(Resources res) {
-         super("Newsfeed", BoxLayout.y());
-        Toolbar tb = new Toolbar(true);
-        setToolbar(tb);
-        getTitleArea().setUIID("Container");
-        setTitle("Liste Des restaurants");
-        getContentPane().setScrollVisible(false);
-
-       super.addSideMenu(res);
+    public void start() {
+        if (current != null) {
+            current.show();
+            return;
+        }
+        Form hi = new Form("Liste des Restaurants");
+        
+         Toolbar tr = new Toolbar(true);
+          
+          
+        hi.setToolbar(tr);
+        
+        hi.setLayout(new BorderLayout());
          Form previous = getCurrentForm();
-        tb.setBackCommand("", (e) -> {
+       hi.getToolbar().setBackCommand("", (e) -> {
             previous.showBack();
         });
-        
-       
-        
-        
-        
+        hi.setLayout(new BorderLayout());
         final MapContainer cnt = new MapContainer(HTML_API_KEY);
         
        
@@ -118,7 +117,7 @@ public class GoogleMapsTestApp extends BaseForm {
                 
         );
         
-        
+        hi.add(BorderLayout.CENTER, root);
         ListEtablissementService lr = new ListEtablissementService();
         for (Etablissement e : lr.getList2()) {
      
@@ -131,7 +130,10 @@ public class GoogleMapsTestApp extends BaseForm {
                 }
             });
         }
-      add(root);
+        hi.setUIID("Formx");
+     
+
+        hi.show();
         
     }
     boolean tapDisabled = false;

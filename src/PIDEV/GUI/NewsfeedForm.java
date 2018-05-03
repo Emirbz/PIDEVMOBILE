@@ -200,7 +200,8 @@ ListEtablissementService le = new ListEtablissementService();
         listresto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-new GoogleMapsTestApp(res).show();
+GoogleMapsTestApp gm = new GoogleMapsTestApp();
+gm.start();
          
             }
         });

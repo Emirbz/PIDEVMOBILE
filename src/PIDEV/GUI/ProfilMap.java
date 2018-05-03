@@ -17,7 +17,6 @@
 package PIDEV.GUI;
 
 import PIDEV.Entities.Etablissement;
-import PIDEV.Services.ListEtablissementService;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ToastBar;
 import com.codename1.googlemaps.MapContainer;
@@ -31,16 +30,17 @@ import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.SideMenuBar;
-import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
+import com.codename1.ui.Toolbar;
+
+
 
 public class ProfilMap extends BaseForm {
 
@@ -58,28 +58,22 @@ public class ProfilMap extends BaseForm {
         }
     }
     MapObject sydney;
-    public ProfilMap(Etablissement ex,Resources res) {
-         super("Newsfeed", BoxLayout.y());
-        Toolbar tb = new Toolbar(true);
-        setToolbar(tb);
-        getTitleArea().setUIID("Container");
-        setTitle("Adresse de "+ex.getName());
-        getContentPane().setScrollVisible(false);
-
-       
-           super.addSideMenu(res);
-         Form previous = getCurrentForm();
-        tb.setBackCommand("", (e) -> {
-            previous.showBack();
-        });
+    public void start(Etablissement ex) {
         if (current != null) {
             current.show();
             return;
         }
-        Form hi = new Form();
+        Form hi = new Form("Adresse de "+ex.getName());
+        Toolbar tr = new Toolbar(true);
+          
+          
+        hi.setToolbar(tr);
         
         hi.setLayout(new BorderLayout());
-        hi.setUIID("Button");
+         Form previous = getCurrentForm();
+       hi.getToolbar().setBackCommand("", (e) -> {
+            previous.showBack();
+        });
         final MapContainer cnt = new MapContainer(HTML_API_KEY);
         
        
@@ -112,15 +106,6 @@ public class ProfilMap extends BaseForm {
          
             }
         });
-          FloatingActionButton nextForm1= FloatingActionButton.createFAB(FontImage.MATERIAL_PLACE);
-        nextForm1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
- 
-         cnt.zoom(new Coord(ex.getLatitude() ,ex.getLongitude()),14);
-         
-            }
-        });
 
        
         
@@ -131,7 +116,7 @@ public class ProfilMap extends BaseForm {
                 
         );
         
-//        hi.add(BorderLayout.CENTER, root);
+       hi.add(BorderLayout.CENTER, root);
   
 
      
@@ -143,10 +128,8 @@ public class ProfilMap extends BaseForm {
                             +"\n"+"Dimanche "+ex.getDimancheo()+"-"+ex.getDimanchef(), FontImage.MATERIAL_PLACE);
                 }
             });
-         
-        add(root);
-        add(nextForm1);
-//        hi.show();
+       
+        hi.show();
         
     }
     boolean tapDisabled = false;
