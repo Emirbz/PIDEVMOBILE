@@ -112,6 +112,15 @@ public class ProfilMap extends BaseForm {
          
             }
         });
+          FloatingActionButton nextForm1= FloatingActionButton.createFAB(FontImage.MATERIAL_PLACE);
+        nextForm1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+ 
+         cnt.zoom(new Coord(ex.getLatitude() ,ex.getLongitude()),14);
+         
+            }
+        });
 
        
         
@@ -134,7 +143,9 @@ public class ProfilMap extends BaseForm {
                             +"\n"+"Dimanche "+ex.getDimancheo()+"-"+ex.getDimanchef(), FontImage.MATERIAL_PLACE);
                 }
             });
+         
         add(root);
+        add(nextForm1);
 //        hi.show();
         
     }
