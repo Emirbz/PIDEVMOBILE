@@ -67,7 +67,7 @@ public class GoogleMapsTestApp extends BaseForm {
         getContentPane().setScrollVisible(false);
 
         super.addSideMenu(res);
-          FloatingActionButton back = FloatingActionButton.createFAB(FontImage.MATERIAL_BACKUP);
+         
            Form previous = getCurrentForm();
         tb.setBackCommand("", (e) -> {
             previous.showBack();
@@ -132,10 +132,7 @@ public class GoogleMapsTestApp extends BaseForm {
                 }
             });
         }
-        hi.setUIID("Formx");
-     
-
-        hi.show();
+      add(root);
         
     }
     boolean tapDisabled = false;
