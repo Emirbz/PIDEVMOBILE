@@ -310,5 +310,149 @@ public class ListEtablissementService {
         NetworkManager.getInstance().addToQueueAndWait(con);
         return listEtabsHote;
     }
+    ///////
+     public ArrayList<Etablissement> getListTaskCulture(String json) {
+
+        ArrayList<Etablissement> listEtabsCulture = new ArrayList<>();
+
+        try {
+//            System.out.println(json);
+            JSONParser j = new JSONParser();
+
+            Map<String, Object> Etab = j.parseJSON(new CharArrayReader(json.toCharArray()));
+
+            List<Map<String, Object>> list = (List<Map<String, Object>>) Etab.get("root");
+
+            for (Map<String, Object> obj : list) {
+                Etablissement e = new Etablissement();
+
+                float id = Float.parseFloat(obj.get("id").toString());
+
+                e.setId((int) id);
+
+                e.setName(obj.get("name").toString());
+
+                e.setAddress(obj.get("address").toString());
+                LinkedHashMap<String, List<Object>> cc = (LinkedHashMap<String, List<Object>>) obj.get("souscat");
+                List<List<Object>> l = new ArrayList<List<Object>>(cc.values());
+                SousCategorie sc = new SousCategorie();
+                sc.setNom(String.valueOf(l.get(1)));
+         
+                e.setSouscat(sc);
+                e.setDevis_name(obj.get("devisName").toString());
+                e.setImg1(obj.get("img1").toString());
+                e.setImg2(obj.get("img2").toString());
+                e.setImg3(obj.get("img3").toString());
+                e.setMoyqualite(Double.parseDouble(obj.get("moyqualite").toString()));
+                e.setMoyservice(Double.parseDouble(obj.get("moyservice").toString()));
+                e.setLatitude(Double.parseDouble(obj.get("latitude").toString()));
+                e.setLongitude(Double.parseDouble(obj.get("longitude").toString()));
+                e.setClimatisation(Boolean.parseBoolean(obj.get("climatisation").toString()));
+                 e.setLundisamedio(obj.get("lundisamedio").toString());
+                 e.setLundisamedif(obj.get("lundisamedif").toString());
+                 e.setDimancheo(obj.get("dimancheo").toString());
+                 e.setDimanchef(obj.get("dimanchef").toString());
+                 e.setCategorie(obj.get("categorie").toString());
+              
+                
+              
+                listEtabsCulture.add(e);
+
+            }
+
+        } catch (IOException ex) {
+        }
+
+        return  listEtabsCulture;
+
+    }
+
+    ArrayList<Etablissement> listEtabsCultur = new ArrayList<>();
+
+    public ArrayList<Etablissement> getList2Cultur() {
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/PIDEV/web/app_dev.php/amir/list_culture_filter_json");
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                ListEtablissementService ser = new ListEtablissementService();
+                listEtabsCultur= ser.getListTask(new String(con.getResponseData()));
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+        return listEtabsCultur;
+    }
+
+    public ArrayList<Etablissement> getListTaskBeaute(String json) {
+
+        ArrayList<Etablissement> listEtabsBeaute = new ArrayList<>();
+
+        try {
+//            System.out.println(json);
+            JSONParser j = new JSONParser();
+
+            Map<String, Object> Etab = j.parseJSON(new CharArrayReader(json.toCharArray()));
+
+            List<Map<String, Object>> list = (List<Map<String, Object>>) Etab.get("root");
+
+            for (Map<String, Object> obj : list) {
+                Etablissement e = new Etablissement();
+
+                float id = Float.parseFloat(obj.get("id").toString());
+
+                e.setId((int) id);
+
+                e.setName(obj.get("name").toString());
+
+                e.setAddress(obj.get("address").toString());
+                LinkedHashMap<String, List<Object>> cc = (LinkedHashMap<String, List<Object>>) obj.get("souscat");
+                List<List<Object>> l = new ArrayList<List<Object>>(cc.values());
+                SousCategorie sc = new SousCategorie();
+                sc.setNom(String.valueOf(l.get(1)));
+         
+                e.setSouscat(sc);
+                e.setDevis_name(obj.get("devisName").toString());
+                e.setImg1(obj.get("img1").toString());
+                e.setImg2(obj.get("img2").toString());
+                e.setImg3(obj.get("img3").toString());
+                e.setMoyqualite(Double.parseDouble(obj.get("moyqualite").toString()));
+                e.setMoyservice(Double.parseDouble(obj.get("moyservice").toString()));
+                e.setLatitude(Double.parseDouble(obj.get("latitude").toString()));
+                e.setLongitude(Double.parseDouble(obj.get("longitude").toString()));
+                e.setClimatisation(Boolean.parseBoolean(obj.get("climatisation").toString()));
+                 e.setLundisamedio(obj.get("lundisamedio").toString());
+                 e.setLundisamedif(obj.get("lundisamedif").toString());
+                 e.setDimancheo(obj.get("dimancheo").toString());
+                 e.setDimanchef(obj.get("dimanchef").toString());
+                 e.setCategorie(obj.get("categorie").toString());
+              
+                
+              
+                listEtabsBeaute.add(e);
+
+            }
+
+        } catch (IOException ex) {
+        }
+
+        return  listEtabsBeaute;
+
+    }
+
+    ArrayList<Etablissement> listEtabsBeaut = new ArrayList<>();
+
+    public ArrayList<Etablissement> getList2Beaut() {
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/PIDEV/web/app_dev.php/amir/list_beaute_filter_json");
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                ListEtablissementService ser = new ListEtablissementService();
+                listEtabsBeaut= ser.getListTask(new String(con.getResponseData()));
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+        return listEtabsBeaut;
+    }
 
 }

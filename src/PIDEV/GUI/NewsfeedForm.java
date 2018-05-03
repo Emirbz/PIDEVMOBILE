@@ -213,8 +213,12 @@ new GoogleMapsTestApp(res).show();
                       public void actionPerformed(ActionEvent evt) {
                           if (cat.getSelectedStringIndex()==0)
                           {new ListRestoFilter(res).show();}
-                           else if (  cat.getSelectedStringIndex()==1);
+                           else if (  cat.getSelectedStringIndex()==1)
                           { new ListHotelFilter(res).show();}
+                            else if (  cat.getSelectedStringIndex()==2)
+                          { new ListCultureFilter(res).show();}
+                          else if (  cat.getSelectedStringIndex()==3)
+                          { new ListBeauteFilter(res).show();}
                       
  
                          
