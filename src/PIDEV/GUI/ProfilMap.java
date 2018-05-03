@@ -63,7 +63,7 @@ public class ProfilMap extends BaseForm {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Liste Review");
+        setTitle("Adresse de "+ex.getName());
         getContentPane().setScrollVisible(false);
 
        
@@ -76,7 +76,7 @@ public class ProfilMap extends BaseForm {
             current.show();
             return;
         }
-        Form hi = new Form("Adresse de "+ex.getName());
+        Form hi = new Form();
         
         hi.setLayout(new BorderLayout());
         hi.setUIID("Button");

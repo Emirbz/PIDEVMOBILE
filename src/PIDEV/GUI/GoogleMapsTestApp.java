@@ -118,7 +118,7 @@ public class GoogleMapsTestApp extends BaseForm {
                 
         );
         
-        hi.add(BorderLayout.CENTER, root);
+        
         ListEtablissementService lr = new ListEtablissementService();
         for (Etablissement e : lr.getList2()) {
      
