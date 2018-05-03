@@ -61,7 +61,9 @@ public class ProfilMap {
             return;
         }
         Form hi = new Form("Adresse de "+ex.getName());
+        
         hi.setLayout(new BorderLayout());
+        hi.setUIID("Button");
         final MapContainer cnt = new MapContainer(HTML_API_KEY);
         
        

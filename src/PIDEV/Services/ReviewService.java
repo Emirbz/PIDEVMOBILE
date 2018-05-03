@@ -140,7 +140,7 @@ String count="init";
     public void deleterev(int id,int idetab) {
         ConnectionRequest con = new ConnectionRequest();
         con.setUrl("http://localhost/PIDEV/web/app_dev.php/amir/delete_review_json?id="+id+"&idetab="+idetab);
-        System.out.println("http://localhost/PIDEV/web/app_dev.php/amir/delete_review_json?id="+id+"&idetab="+idetab);
+        
         NetworkManager.getInstance().addToQueueAndWait(con);
        
     }

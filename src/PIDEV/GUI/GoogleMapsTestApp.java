@@ -31,19 +31,21 @@ import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.SideMenuBar;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
 
-public class GoogleMapsTestApp {
+public class GoogleMapsTestApp  {
 
     private static final String HTML_API_KEY = "AIzaSyBWeRU02YUYPdwRuMFyTKIXUbHjq6e35Gw";
-    private Form current;
+    
 
     public void init(Object context) {
         try {
@@ -56,12 +58,12 @@ public class GoogleMapsTestApp {
         }
     }
     MapObject sydney;
-    public void start() {
-        if (current != null) {
-            current.show();
-            return;
-        }
+    public GoogleMapsTestApp(Resources res) {
+        
+        
+       
         Form hi = new Form("Liste des Restaurants");
+        
         hi.setLayout(new BorderLayout());
         final MapContainer cnt = new MapContainer(HTML_API_KEY);
         
@@ -118,19 +120,15 @@ public class GoogleMapsTestApp {
                 }
             });
         }
-        hi.setUIID("Label");
-     Form previous = getCurrentForm();
-        hi.getToolbar().setBackCommand("", (e) -> {
-            previous.showBack();
-        });
+        hi.setUIID("Formx");
+     
+
         hi.show();
         
     }
     boolean tapDisabled = false;
 
-    public void stop() {
-        current = Display.getInstance().getCurrent();
-    }
+   
 
     public void destroy() {
     }

@@ -194,8 +194,8 @@ ListEtablissementService le = new ListEtablissementService();
         listresto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-GoogleMapsTestApp gm = new GoogleMapsTestApp();
-gm.start();
+
+                new GoogleMapsTestApp(res).show();
         
          
             }
