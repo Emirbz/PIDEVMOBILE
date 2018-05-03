@@ -30,10 +30,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import PIDEV.Services.DealService;
-import com.codename1.components.ImageViewer;
+import static com.codename1.ui.CN.getCurrentForm;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.plaf.UIManager;
+import com.codename1.ui.util.Resources;
 import rest.file.uploader.tn.FileUploader;
 
 /**
@@ -44,7 +47,7 @@ public class AddDeal {
 
     Form f;
     String imgname;
-
+    Resources res = UIManager.initFirstTheme("/theme");
     TextField nom = new TextField("", "Nom");
     TextField desc = new TextField("", "Description");
     TextField oldprix = new TextField("", "Ancien Prix");
@@ -185,8 +188,15 @@ public class AddDeal {
                     d.setDevisName(imgname);
                     ajoutTask(d);
                     System.out.println("success");
+                    new NewsfeedForm(res).show();
                 }
             }
+        });
+        Toolbar tb = new Toolbar(true);
+        f.setToolbar(tb);
+        Form previous = getCurrentForm();
+        f.getToolbar().setBackCommand("", (e) -> {
+            previous.showBack();
         });
         f.show();
     }
