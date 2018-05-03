@@ -181,10 +181,18 @@ public class ListDeals {
             c1.getStyle().setPaddingBottom(20);
             c1.add(img1);
             c1.add(cnom);
-
             cx.add(c1);
 
         }
+        Button stat = new Button();
+        stat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                Statistic st = new Statistic();
+                st.createPieChartForm().show();
+            }
+        });
+        cx.add(stat);
         return cx;
 
     }
