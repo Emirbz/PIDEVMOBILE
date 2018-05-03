@@ -67,6 +67,7 @@ public class ListEtablissementService {
                  e.setLundisamedif(obj.get("lundisamedif").toString());
                  e.setDimancheo(obj.get("dimancheo").toString());
                  e.setDimanchef(obj.get("dimanchef").toString());
+                 e.setCategorie(obj.get("categorie").toString());
               
                 
               

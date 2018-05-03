@@ -169,12 +169,19 @@ public class NewsfeedForm extends BaseForm {
 
 ListEtablissementService le = new ListEtablissementService();
         ArrayList<SousCategorie> cats = le.getListsouscat();
-        Picker cat = new Picker();
-        String ses[] = new String[le.getListsouscat().size()];
-        for (int i=0;i<le.getListsouscat().size();i++)
-        {ses[i] = cats.get(i).getNom();}
+//        Picker cat = new Picker();
+//        String ses[] = new String[le.getListsouscat().size()];
+//        for (int i=0;i<le.getListsouscat().size();i++)
+//        {ses[i] = cats.get(i).getNom();}
+// 
+    Picker cat = new Picker();
+        String ses[] = new String[4];
+        
+        ses[0] = "Restaurants";
+        ses[1] = "Hotels";
+        ses[2] = "Espace Culturels";
+        ses[3] = "Beaute et Bien Etre";
  
-
         
                 
         Button go = new Button("Filter");

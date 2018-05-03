@@ -42,6 +42,7 @@ public class ListResto {
     Label name;
 
     Label souscat;
+    Label categorie;
     Container cx = new Container(BoxLayout.y());
     private Resources theme;
 
@@ -52,7 +53,7 @@ public class ListResto {
         ListEtablissementService lr = new ListEtablissementService();
         for (Etablissement e : lr.getList2()) {
 
-            Image placeholder = Image.createImage(130, 100);
+            Image placeholder = Image.createImage(130, 110);
             EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
             URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + e.getDevis_name(), "http://localhost/PIDEV/web/devis/" + e.getDevis_name());
             ImageViewer img1 = new ImageViewer(imgUrl);
@@ -60,6 +61,13 @@ public class ListResto {
             name = new Label();
 
             souscat = new Label();
+            categorie= new Label();
+            categorie.setText(e.getCategorie());
+            categorie.setUIID("Label2");
+             Style caticon = new Style(souscat.getUnselectedStyle());
+            caticon.setFgColor(0x73879c);
+            FontImage caticonx = FontImage.createMaterial(FontImage.MATERIAL_HOTEL, caticon);
+            categorie.setIcon(caticonx);
 
            
             int fontSize = Display.getInstance().convertToPixels(3);
@@ -98,6 +106,7 @@ public class ListResto {
             cnom.getStyle().setPaddingBottom(2);
 
             cnom.add(name);
+            cnom.add(categorie);
             cnom.add(souscat);
             cnom.add(qualite);
         
