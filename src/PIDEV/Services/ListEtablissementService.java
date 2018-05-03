@@ -299,7 +299,7 @@ public class ListEtablissementService {
 
     public ArrayList<Etablissement> getList2Hote() {
         ConnectionRequest con = new ConnectionRequest();
-        con.setUrl("http://localhost/PIDEV/web/app_dev.php/amir/list_restaurant_filter_json");
+        con.setUrl("http://localhost/PIDEV/web/app_dev.php/amir/list_hotel_filter_json");
         con.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
