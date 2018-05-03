@@ -205,7 +205,8 @@ public class AddDeal {
         ConnectionRequest con = new ConnectionRequest();
         String Url = "http://localhost/pidev/web/app_dev.php/deals/ajs/" + ta.getCat().getId() + "?nom=" + ta.getNom() + "&promotion=" + ta.getPromotion()
                 + "&oldprix=" + ta.getOldprix() + "&description=" + ta.getDescription() + "&datefin=" + ta.getDatefin()
-                + "&region=" + ta.getRegion() + "&adresse=" + ta.getAdresse() + "&devisName=" + ta.getDevisName() + "&placesdispo=" + ta.getPlacesdispo();
+                + "&region=" + ta.getRegion() + "&adresse=" + ta.getAdresse() + "&devisName=" + ta.getDevisName() + "&placesdispo=" + ta.getPlacesdispo()
+                +"&idu="+SignInForm.userCon.getId();
         con.setUrl(Url);
         con.addResponseListener((e) -> {
             String str = new String(con.getResponseData());

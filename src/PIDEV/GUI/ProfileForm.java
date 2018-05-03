@@ -16,7 +16,6 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
-
 package PIDEV.GUI;
 
 import com.codename1.components.ScaleImageLabel;
@@ -49,14 +48,14 @@ public class ProfileForm extends BaseForm {
         getTitleArea().setUIID("Container");
         setTitle("Profile");
         getContentPane().setScrollVisible(false);
-        
+
         super.addSideMenu(res);
-        
-        tb.addSearchCommand(e -> {});
-        
-        
+
+        tb.addSearchCommand(e -> {
+        });
+
         Image img = res.getImage("profile-background.jpg");
-        if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }
         ScaleImageLabel sl = new ScaleImageLabel(img);
@@ -67,16 +66,16 @@ public class ProfileForm extends BaseForm {
         Label twitter = new Label("486 followers", res.getImage("twitter-logo.png"), "BottomPad");
         facebook.setTextPosition(BOTTOM);
         twitter.setTextPosition(BOTTOM);
-        
+
         add(LayeredLayout.encloseIn(
                 sl,
                 BorderLayout.south(
-                    GridLayout.encloseIn(3, 
-                            facebook,
-                            FlowLayout.encloseCenter(
-                                new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond")),
-                            twitter
-                    )
+                        GridLayout.encloseIn(3,
+                                facebook,
+                                FlowLayout.encloseCenter(
+                                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond")),
+                                twitter
+                        )
                 )
         ));
 
@@ -87,7 +86,7 @@ public class ProfileForm extends BaseForm {
         TextField email = new TextField("sandeep@gmail.com", "E-Mail", 20, TextField.EMAILADDR);
         email.setUIID("TextFieldBlack");
         addStringValue("E-Mail", email);
-        
+
         TextField password = new TextField("sandeep", "Password", 20, TextField.PASSWORD);
         password.setUIID("TextFieldBlack");
         addStringValue("Password", password);
@@ -98,11 +97,11 @@ public class ProfileForm extends BaseForm {
         CheckBox cb2 = CheckBox.createToggle(res.getImage("on-off-off.png"));
         cb2.setUIID("Label");
         cb2.setPressedIcon(res.getImage("on-off-on.png"));
-        
+
         addStringValue("Facebook", FlowLayout.encloseRightMiddle(cb1));
         addStringValue("Twitter", FlowLayout.encloseRightMiddle(cb2));
     }
-    
+
     private void addStringValue(String s, Component v) {
         add(BorderLayout.west(new Label(s, "PaddedLabel")).
                 add(BorderLayout.CENTER, v));

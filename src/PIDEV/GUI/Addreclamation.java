@@ -18,7 +18,7 @@ public class Addreclamation {
     public void add(Reclamation d) {
         ConnectionRequest con = new ConnectionRequest();
         String Url = "http://localhost/pidev/web/app_dev.php/deals/recj?contenu="+d.getContenu()+"&type="+d.getTypeobj()+
-                "&idobj="+d.getIdobj();
+                "&idobj="+d.getIdobj()+"$idu"+SignInForm.userCon.getId();
         con.setUrl(Url);
         con.addResponseListener((e) -> {
             String str = new String(con.getResponseData());
