@@ -15,11 +15,14 @@ import PIDEV.Entities.Note;
 import PIDEV.Entities.Reclamation;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.InteractionDialog;
+import com.codename1.components.ScaleImageButton;
+import com.codename1.components.ScaleImageLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.convertToPixels;
 import static com.codename1.ui.CN.getCurrentForm;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
@@ -29,11 +32,14 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
-import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
+import com.codename1.ui.util.Resources;
 
 /**
  *
@@ -41,20 +47,43 @@ import com.codename1.ui.plaf.Style;
  */
 public class DealDetails {
 
+    Resources res = UIManager.initFirstTheme("/theme");
+
     void showPropertyDetails(Deal d) {
         final Form propertyDetails = new Form("Property Details", new BoxLayout(BoxLayout.Y_AXIS));
         Toolbar tb = new Toolbar(true);
         propertyDetails.setToolbar(tb);
         propertyDetails.getTitleArea().setUIID("Container");
+
+        Image img = res.getImage("profilebg.jpg");
+        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
+            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
+        }
+        ScaleImageLabel sl = new ScaleImageLabel(img);
+        sl.setUIID("BottomPad");
+        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        Image placeholder = Image.createImage(240, 120);
+        EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
+        String url = "http://localhost/PIDEV/web/devis/" + d.getDevisName();
+        String thumb = "http://localhost/PIDEV/web/devis/" + d.getDevisName();
+        URLImage thumbImage = URLImage.createToStorage(encImage, url, thumb, URLImage.RESIZE_SCALE_TO_FILL);
+        ScaleImageButton btn = new ScaleImageButton(thumbImage);
+        btn.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        btn.setUIID("PictureWhiteBackground");
+        propertyDetails.add(LayeredLayout.encloseIn(
+                sl,
+                BorderLayout.south(
+                        GridLayout.encloseIn(1,
+                                FlowLayout.encloseCenter(
+                                        btn
+                                )
+                        )
+                )));
+
         propertyDetails.setTitle(d.getNom());
         propertyDetails.getContentPane().setScrollVisible(false);
         String price_formatted = d.getNewprix().toString();
         String summary = d.getDescription();
-        Image placeholder = Image.createImage(350, 200);
-        EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
-        URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + d.getDevisName(),
-                "http://localhost/PIDEV/web/devis/" + d.getDevisName());
-        ImageViewer img1 = new ImageViewer(imgUrl);
         String adresse = d.getAdresse();
         String region = d.getRegion();
         Slider rat = createStarRankSlider(d.getRating());
@@ -142,9 +171,10 @@ public class DealDetails {
             }
 
         });
-
-        propertyDetails.add(new Label("Prix : " + price_formatted, "SecondaryTitle")).
-                add(img1).
+        Label old = new Label(String.valueOf(d.getOldprix()));
+        old.setUIID("strikedtext");
+        propertyDetails.add(old).
+                add(new Label("Prix : " + price_formatted, "SecondaryTitle")).
                 add("Adresse :\n" + adresse).
                 add(ratc).
                 add("Région : \n" + region).

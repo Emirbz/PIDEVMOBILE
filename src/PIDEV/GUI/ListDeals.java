@@ -149,12 +149,7 @@ public class ListDeals {
                     derive(fontSize, Font.STYLE_PLAIN);
             Container cnom = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 
-            Label name = new Label(e.getNom());
-
-            Style nameicon = new Style(name.getUnselectedStyle());
-            nameicon.setFgColor(0x566573);
-            FontImage nameiconx = FontImage.createMaterial(FontImage.MATERIAL_BOOKMARK, nameicon);
-            name.setIcon(nameiconx);
+            Label name = new Label("Nom : "+e.getNom());
             System.out.println(e.getCat());
             String rating = String.valueOf(e.getRating());
             Slider rat = createStarRankSlider(Integer.parseInt(rating.substring(0, 1)));
