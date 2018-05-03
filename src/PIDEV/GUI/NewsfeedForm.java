@@ -211,11 +211,14 @@ new GoogleMapsTestApp(res).show();
                 go.addActionListener(new ActionListener() {
                       @Override
                       public void actionPerformed(ActionEvent evt) {
-                
-                          tou.add(filter);
-                       
-                           tou.add(lr.ListRestoTrie(cat.getSelectedString())); /////////zab
-                           
+                          if (cat.getSelectedStringIndex()==0)
+                          {new ListRestoFilter(res).show();}
+                           else if (  cat.getSelectedStringIndex()==1);
+                          { new ListHotelFilter(res).show();}
+                      
+ 
+                         
+                      
                       }
                   });
                
