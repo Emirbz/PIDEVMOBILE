@@ -24,22 +24,25 @@ import com.codename1.googlemaps.MapContainer;
 import com.codename1.googlemaps.MapContainer.MapObject;
 import com.codename1.maps.Coord;
 import com.codename1.ui.Button;
+import static com.codename1.ui.CN.getCurrentForm;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.SideMenuBar;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
 
-public class ProfilMap {
+public class ProfilMap extends BaseForm {
 
     private static final String HTML_API_KEY = "AIzaSyBWeRU02YUYPdwRuMFyTKIXUbHjq6e35Gw";
     private Form current;
@@ -55,7 +58,20 @@ public class ProfilMap {
         }
     }
     MapObject sydney;
-    public void start(Etablissement ex) {
+    public ProfilMap(Etablissement ex,Resources res) {
+         super("Newsfeed", BoxLayout.y());
+        Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        setTitle("Liste Review");
+        getContentPane().setScrollVisible(false);
+
+       
+          FloatingActionButton back = FloatingActionButton.createFAB(FontImage.MATERIAL_BACKUP);
+           Form previous = getCurrentForm();
+        tb.setBackCommand("", (e) -> {
+            previous.showBack();
+        });
         if (current != null) {
             current.show();
             return;
@@ -106,7 +122,7 @@ public class ProfilMap {
                 
         );
         
-        hi.add(BorderLayout.CENTER, root);
+//        hi.add(BorderLayout.CENTER, root);
   
 
      
@@ -118,8 +134,8 @@ public class ProfilMap {
                             +"\n"+"Dimanche "+ex.getDimancheo()+"-"+ex.getDimanchef(), FontImage.MATERIAL_PLACE);
                 }
             });
-        
-        hi.show();
+        add(root);
+//        hi.show();
         
     }
     boolean tapDisabled = false;

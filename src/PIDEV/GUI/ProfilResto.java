@@ -262,8 +262,7 @@ review.addActionListener(new ActionListener() {
             FloatingActionButton mapresto = FloatingActionButton.createFAB(FontImage.MATERIAL_PLACE);
             mapresto.setUIID("label4");
             mapresto.addActionListener((evt) -> {
-            ProfilMap pm = new ProfilMap();
-            pm.start(e);
+            new ProfilMap(e,res).show();
             });
             
             

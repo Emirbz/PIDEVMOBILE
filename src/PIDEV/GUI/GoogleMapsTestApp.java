@@ -42,10 +42,10 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import java.io.IOException;
 
-public class GoogleMapsTestApp  {
+public class GoogleMapsTestApp extends BaseForm {
 
     private static final String HTML_API_KEY = "AIzaSyBWeRU02YUYPdwRuMFyTKIXUbHjq6e35Gw";
-    
+    private Form current;
 
     public void init(Object context) {
         try {
@@ -59,7 +59,19 @@ public class GoogleMapsTestApp  {
     }
     MapObject sydney;
     public GoogleMapsTestApp(Resources res) {
-        
+         super("Newsfeed", BoxLayout.y());
+        Toolbar tb = new Toolbar(true);
+        setToolbar(tb);
+        getTitleArea().setUIID("Container");
+        setTitle("Liste Review");
+        getContentPane().setScrollVisible(false);
+
+        super.addSideMenu(res);
+          FloatingActionButton back = FloatingActionButton.createFAB(FontImage.MATERIAL_BACKUP);
+           Form previous = getCurrentForm();
+        tb.setBackCommand("", (e) -> {
+            previous.showBack();
+        });
         
        
         Form hi = new Form("Liste des Restaurants");
@@ -128,7 +140,9 @@ public class GoogleMapsTestApp  {
     }
     boolean tapDisabled = false;
 
-   
+    public void stop() {
+        current = Display.getInstance().getCurrent();
+    }
 
     public void destroy() {
     }

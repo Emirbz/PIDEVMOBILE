@@ -26,7 +26,6 @@ import com.codename1.components.SpanLabel;
 import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
-import com.codename1.ui.ComboBox;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
@@ -194,9 +193,7 @@ ListEtablissementService le = new ListEtablissementService();
         listresto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-
-                new GoogleMapsTestApp(res).show();
-        
+new GoogleMapsTestApp(res).show();
          
             }
         });
