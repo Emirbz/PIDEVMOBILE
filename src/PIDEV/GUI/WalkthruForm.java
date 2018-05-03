@@ -106,14 +106,13 @@ public class WalkthruForm extends Form {
             }
         });
         
-        Button skip = new Button("Skip");
-        skip.setUIID("SkipButton");
-        skip.addActionListener(e -> new SignInForm(res).show());
+//        Button skip = new Button("Skip");
+//        skip.setUIID("SkipButton");
+//        skip.addActionListener(e -> new SignInForm(res).show());
         
         Container welcomeNoteArea = BoxLayout.encloseY(message,
                 LayeredLayout.encloseIn(
-                        radioContainer,
-                        BorderLayout.east(skip)
+                        radioContainer
                 )
         );
         welcomeNoteArea.setUIID("WelcomeNoteArea");
