@@ -119,11 +119,9 @@ public ListReview(int id,Etablissement etab,Resources res){
                         
                         lr.deleterev(e.getId(),id);
                         ToastBar.showMessage("Votre commentaire a été supprimé", FontImage.MATERIAL_INFO);
-                       try {
-                           new ProfilResto(res,id).show();
-                       } catch (IOException ex) {
-                          
-                       }
+                      
+                          new ListReview(etab.getId(), etab, res).show();
+                     
 }
                 
                        

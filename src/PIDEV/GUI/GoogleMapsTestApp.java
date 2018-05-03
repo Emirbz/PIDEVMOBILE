@@ -63,7 +63,7 @@ public class GoogleMapsTestApp extends BaseForm {
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Liste Review");
+        setTitle("Liste Des restaurants");
         getContentPane().setScrollVisible(false);
 
        super.addSideMenu(res);
@@ -73,9 +73,9 @@ public class GoogleMapsTestApp extends BaseForm {
         });
         
        
-        Form hi = new Form("Liste des Restaurants");
         
-        hi.setLayout(new BorderLayout());
+        
+        
         final MapContainer cnt = new MapContainer(HTML_API_KEY);
         
        
