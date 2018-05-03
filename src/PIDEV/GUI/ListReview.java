@@ -62,7 +62,7 @@ public ListReview(int id,Etablissement etab,Resources res){
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
-        setTitle("Liste Review");
+        setTitle("Liste Reviews");
         getContentPane().setScrollVisible(false);
 
         super.addSideMenu(res);
@@ -119,9 +119,11 @@ public ListReview(int id,Etablissement etab,Resources res){
                         
                         lr.deleterev(e.getId(),id);
                         ToastBar.showMessage("Votre commentaire a été supprimé", FontImage.MATERIAL_INFO);
-                      
-                          new ListReview(etab.getId(), etab, res).show();
-                     
+                       try {
+                           new ProfilResto(res,id).show();
+                       } catch (IOException ex) {
+                          
+                       }
 }
                 
                        
