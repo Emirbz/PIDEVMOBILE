@@ -28,6 +28,7 @@ import com.codename1.ui.Slider;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
+import java.util.Date;
 
 /**
  *
@@ -122,7 +123,7 @@ public class ListDeals {
         DealService lr = new DealService();
         for (Deal e : lr.getListDeals2()) {
 
-            Image placeholder = Image.createImage(130, 130);
+            Image placeholder = Image.createImage(150, 200);
             EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
             URLImage imgUrl = URLImage.createToStorage(encImage, "http://localhost/PIDEV/web/devis/" + e.getDevisName(),
                     "http://localhost/PIDEV/web/devis/" + e.getDevisName());
@@ -149,7 +150,17 @@ public class ListDeals {
                     derive(fontSize, Font.STYLE_PLAIN);
             Container cnom = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 
-            Label name = new Label("Nom : "+e.getNom());
+            Date dd = new Date();
+            Date pp = e.getDatefin();
+            long diff = (pp.getTime() - dd.getTime()) / 1000 / 60 / 60 / 24;
+            Label dsd = new Label();
+            if (diff > 0) {
+                dsd.setText(String.valueOf(diff) + " jours restants");
+            } else {
+                dsd.setText("Deal expiré");
+            }
+
+            Label name = new Label("Nom : " + e.getNom());
             System.out.println(e.getCat());
             String rating = String.valueOf(e.getRating());
             Slider rat = createStarRankSlider(Integer.parseInt(rating.substring(0, 1)));
@@ -164,12 +175,11 @@ public class ListDeals {
             cnom.add(name);
 
             cnom.add(ratc);
+            cnom.add(dsd);
             cnom.add(details);
             c1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
             c1.getStyle().setPaddingBottom(20);
-
             c1.add(img1);
-
             c1.add(cnom);
 
             cx.add(c1);
