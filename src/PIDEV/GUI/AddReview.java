@@ -15,6 +15,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import static com.codename1.ui.CN.convertToPixels;
 import static com.codename1.ui.CN.getCurrentForm;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
@@ -23,7 +24,6 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
-import com.codename1.ui.RadioButton;
 import com.codename1.ui.Slider;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
@@ -38,8 +38,11 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.table.TableLayout.Constraint;
 import com.codename1.ui.util.Resources;
+import com.codename1.ui.validation.Validator;
 import java.io.IOException;
+
 
 
 /**
@@ -49,6 +52,10 @@ import java.io.IOException;
 public class AddReview extends BaseForm {
     Form f;
     Etablissement e;
+    TextField titre;
+    TextField commentaire;
+    Slider qualite;
+    Slider service;
     
     public AddReview(Etablissement e,Resources res) {
                   super("", BoxLayout.y());
@@ -94,8 +101,11 @@ public class AddReview extends BaseForm {
 
       
    
-        TextField commentaire= new TextField("", "Commentaire");
-        TextField titre = new TextField("", "Titre");
+         commentaire= new TextField("", "Commentaire");
+        
+         
+        titre = new TextField("", "Titre");
+    
        
         titre.setUIID("TEXTFIILD");
         commentaire.setUIID("TEXTFIILD");
@@ -106,8 +116,8 @@ public class AddReview extends BaseForm {
 
 
          ButtonGroup barGroup = new ButtonGroup();
-         Slider qualite = createStarRankSlider();
-         Slider service = createStarRankSlider();
+         qualite = createStarRankSlider();
+         service = createStarRankSlider();
            Container rate = new Container(BoxLayout.x());
               Container rate1 = new Container(BoxLayout.x());
                    
@@ -135,6 +145,8 @@ public class AddReview extends BaseForm {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                if (ValidInputs())
+                {
                 Review d = new Review();
                 d.setQualite(Double.valueOf(qualite.getProgress()));
                 d.setService(Double.valueOf(service.getProgress()));
@@ -153,7 +165,7 @@ public class AddReview extends BaseForm {
                     
                 }
         
- 
+                }
                 
             }
         });
@@ -161,6 +173,35 @@ public class AddReview extends BaseForm {
        
     
 }
+     public boolean ValidInputs() {
+         
+                  if ((qualite.getProgress()==0) || (service.getProgress()==0) ) {
+           
+            ToastBar.showMessage("Veuillez noter le service et la qualite", FontImage.MATERIAL_ERROR);
+            return false;
+        }
+
+        if ( (commentaire.getText().isEmpty()) || (titre.getText().isEmpty())) {
+           
+            ToastBar.showMessage("Veuillez remplir tous les champs", FontImage.MATERIAL_ERROR);
+            return false;
+        }
+       
+        else if ( (commentaire.getText().length()<10)) {
+           ToastBar.showMessage("Veuillez saisir un commentaire valide", FontImage.MATERIAL_ERROR);
+             return false;
+        }
+         else if ( (titre.getText().length()<3)) {
+           ToastBar.showMessage("Veuillez saisir un titre valide", FontImage.MATERIAL_ERROR);
+             return false;
+        }
+        
+        return true;
+    }
+    
+   
+
+    
    private Slider createStarRankSlider() {
         Slider starRank = new Slider();
         starRank.setEditable(true);
@@ -194,7 +235,13 @@ public class AddReview extends BaseForm {
         s.setBgImage(star);
         s.setBgTransparency(0);
     }
+   
 
+
+
+
+
+   
     
     
 }
