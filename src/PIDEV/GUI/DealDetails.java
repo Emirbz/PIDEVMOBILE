@@ -171,8 +171,8 @@ public class DealDetails {
             }
 
         });
-        Container ccc=new Container(BoxLayout.x());
-        Label ss=new Label("Ancien Prix :");
+        Container ccc = new Container(BoxLayout.x());
+        Label ss = new Label("Ancien Prix :");
         ss.setUIID("SecondaryTitle");
         Label old = new Label(String.valueOf(d.getOldprix()));
         old.setUIID("strikedtext");

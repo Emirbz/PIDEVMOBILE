@@ -184,7 +184,7 @@ public class ListDeals {
             cx.add(c1);
 
         }
-        Button stat = new Button();
+        Button stat = new Button("Stat");
         stat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

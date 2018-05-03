@@ -16,6 +16,8 @@ import com.codename1.ui.layouts.BorderLayout;
 import java.util.ArrayList;
 import PIDEV.Services.DealService;
 import PIDEV.Entities.Deal;
+import static com.codename1.ui.CN.getCurrentForm;
+import com.codename1.ui.Toolbar;
 
 /**
  *
@@ -93,7 +95,14 @@ public class Statistic {
         ChartComponent c = new ChartComponent(chart);
 
         // Create a form and show it.
-        f = new Form("Statisique des clubs", new BorderLayout());
+        f = new Form("Statisique des deals", new BorderLayout());
+        Toolbar t = new Toolbar(true);
+        f.setToolbar(t);
+        f.getTitleArea().setUIID("Container");
+        Form previous = getCurrentForm();
+        f.getToolbar().setBackCommand("", (es) -> {
+            previous.showBack();
+        });
         f.add(BorderLayout.CENTER, c);
         return f;
 
